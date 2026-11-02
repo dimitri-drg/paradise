@@ -1,0 +1,3944 @@
+{
+  "Name": "Paradise - 6x2",
+  "Description": "Host requires CD2 update 18 or newer. All players require CD2 v18+, MEV and DEA.",
+  "Vars": {
+    "VBMainIntervalSeconds": {
+      "Type": "Float",
+      "Value": 40,
+      "Watch": false
+    },
+    "VBExtraSpawnProbability": {
+      "Type": "Float",
+      "Value": 0.0,
+      "Watch": false
+    },
+    "VBMaxBomberAlive": {
+      "Type": "Float",
+      "Value": {
+        "Mutate": "ByPlayerCount",
+        "Values": [
+          4,
+          5
+        ]
+      },
+      "Watch": false
+    },
+    "VBMaxWardenAlive": {
+      "Type": "Float",
+      "Value": {
+        "Mutate": "ByPlayerCount",
+        "Values": [
+          3,
+          4
+        ]
+      },
+      "Watch": false
+    },
+    "VBMaxMenaceAlive": {
+      "Type": "Float",
+      "Value": {
+        "Mutate": "ByPlayerCount",
+        "Values": [
+          2,
+          4
+        ]
+      },
+      "Watch": false
+    },
+    "VBMaxGrabberAlive": {
+      "Type": "Float",
+      "Value": {
+        "Mutate": "ByPlayerCount",
+        "Values": [
+          2,
+          4
+        ]
+      },
+      "Watch": false
+    },
+    "VBMaxBulkAlive": {
+      "Type": "Float",
+      "Value": {
+        "Mutate": "ByPlayerCount",
+        "Values": [
+          2,
+          3
+        ]
+      },
+      "Watch": false
+    },
+    "VBMaxMiniBulkAlive": {
+      "Type": "Float",
+      "Value": {
+        "Mutate": "ByPlayerCount",
+        "Values": [
+          4,
+          6
+        ]
+      },
+      "Watch": false
+    },
+    "VBMainRoll": {
+      "Type": "String",
+      "Watch": false,
+      "Value": {
+        "Mutate": "RandomChoice",
+        "Choices": [
+          {
+            "Mutate": "If",
+            "Condition": {
+              "Mutate": "IfFloat",
+              "Value": {
+                "Mutate": "Add",
+                "W0": {
+                  "Mutate": "Select",
+                  "Select": {
+                    "Var": "VBLastMainTarget"
+                  },
+                  "Default": {
+                    "Mutate": "IfFloat",
+                    "Value": {
+                      "Mutate": "EnemyCount",
+                      "EDs": [
+                        "ED_Grabber_ParadiseMainVB"
+                      ]
+                    },
+                    "<": {
+                      "Var": "VBMaxGrabberAlive"
+                    },
+                    "Then": 20,
+                    "Else": 0
+                  },
+                  "Grabber": 0
+                },
+                "W1": {
+                  "Mutate": "Select",
+                  "Select": {
+                    "Var": "VBLastMainTarget"
+                  },
+                  "Default": {
+                    "Mutate": "IfFloat",
+                    "Value": {
+                      "Mutate": "EnemyCount",
+                      "EDs": [
+                        "ED_Spider_Buffer_ParadiseMainVB"
+                      ]
+                    },
+                    "<": {
+                      "Var": "VBMaxWardenAlive"
+                    },
+                    "Then": 20,
+                    "Else": 0
+                  },
+                  "Warden": 0
+                },
+                "W2": {
+                  "Mutate": "Select",
+                  "Select": {
+                    "Var": "VBLastMainTarget"
+                  },
+                  "Default": {
+                    "Mutate": "IfFloat",
+                    "Value": {
+                      "Mutate": "EnemyCount",
+                      "EDs": [
+                        "ED_Bomber_ParadiseMainVB",
+                        "ED_Bomber_Ice_ParadiseMainVB",
+                        "ED_Bomber_Explosive_ParadiseMainVB"
+                      ]
+                    },
+                    "<": {
+                      "Var": "VBMaxBomberAlive"
+                    },
+                    "Then": 25,
+                    "Else": 0
+                  },
+                  "Bomber": 0
+                },
+                "W3": {
+                  "Mutate": "Select",
+                  "Select": {
+                    "Var": "VBLastMainTarget"
+                  },
+                  "Default": {
+                    "Mutate": "IfFloat",
+                    "Value": {
+                      "Mutate": "EnemyCount",
+                      "EDs": [
+                        "ED_Spider_RapidShooter_ParadiseMainVB"
+                      ]
+                    },
+                    "<": {
+                      "Var": "VBMaxMenaceAlive"
+                    },
+                    "Then": 15,
+                    "Else": 0
+                  },
+                  "Menace": 0
+                },
+                "W4": {
+                  "Mutate": "Select",
+                  "Select": {
+                    "Var": "VBLastMainTarget"
+                  },
+                  "Default": {
+                    "Mutate": "If",
+                    "Condition": {
+                      "Mutate": "IfFloat",
+                      "Value": {
+                        "Mutate": "Add",
+                        "W0": {
+                          "Mutate": "IfFloat",
+                          "Value": {
+                            "Mutate": "EnemyCount",
+                            "EDs": [
+                              "ED_Spider_ExploderTank_ParadiseMainVB"
+                            ]
+                          },
+                          "<": {
+                            "Var": "VBMaxBulkAlive"
+                          },
+                          "Then": 1,
+                          "Else": 0
+                        },
+                        "W1": {
+                          "Mutate": "IfFloat",
+                          "Value": {
+                            "Mutate": "EnemyCount",
+                            "EDs": [
+                              "XED_Paradise_MainVBMiniBulkPair",
+                              "XED_Paradise_MainVBMiniBulkCompanion"
+                            ]
+                          },
+                          "<": {
+                            "Var": "VBMaxMiniBulkAlive"
+                          },
+                          "Then": 1,
+                          "Else": 0
+                        }
+                      },
+                      ">": 0,
+                      "Then": true,
+                      "Else": false
+                    },
+                    "Then": 5,
+                    "Else": 0
+                  },
+                  "Bulk": 0
+                }
+              },
+              ">": 0,
+              "Then": true,
+              "Else": false
+            },
+            "Then": {
+              "Mutate": "RandomChoice",
+              "Choices": [
+                {
+                  "Mutate": "SelectFromArray",
+                  "Select": {
+                    "Mutate": "Clamp",
+                    "Value": {
+                      "Mutate": "Subtract",
+                      "A": {
+                        "Var": "VBMaxGrabberAlive"
+                      },
+                      "B": {
+                        "Mutate": "EnemyCount",
+                        "EDs": [
+                          "ED_Grabber_ParadiseMainVB"
+                        ]
+                      }
+                    },
+                    "Min": 0,
+                    "Max": 2
+                  },
+                  "Array": [
+                    "None",
+                    "ED_Grabber_ParadiseMainVB|1",
+                    "ED_Grabber_ParadiseMainVB|2"
+                  ]
+                },
+                {
+                  "Mutate": "SelectFromArray",
+                  "Select": {
+                    "Mutate": "Clamp",
+                    "Value": {
+                      "Mutate": "Subtract",
+                      "A": {
+                        "Var": "VBMaxWardenAlive"
+                      },
+                      "B": {
+                        "Mutate": "EnemyCount",
+                        "EDs": [
+                          "ED_Spider_Buffer_ParadiseMainVB"
+                        ]
+                      }
+                    },
+                    "Min": 0,
+                    "Max": 2
+                  },
+                  "Array": [
+                    "None",
+                    "ED_Spider_Buffer_ParadiseMainVB|1",
+                    "ED_Spider_Buffer_ParadiseMainVB|2"
+                  ]
+                },
+                {
+                  "Mutate": "RandomChoice",
+                  "Choices": [
+                    {
+                      "Mutate": "SelectFromArray",
+                      "Select": {
+                        "Mutate": "Clamp",
+                        "Value": {
+                          "Mutate": "Subtract",
+                          "A": {
+                            "Var": "VBMaxBomberAlive"
+                          },
+                          "B": {
+                            "Mutate": "EnemyCount",
+                            "EDs": [
+                              "ED_Bomber_ParadiseMainVB",
+                              "ED_Bomber_Ice_ParadiseMainVB",
+                              "ED_Bomber_Explosive_ParadiseMainVB"
+                            ]
+                          }
+                        },
+                        "Min": 0,
+                        "Max": 2
+                      },
+                      "Array": [
+                        "None",
+                        "ED_Bomber_ParadiseMainVB|1",
+                        "ED_Bomber_ParadiseMainVB|2"
+                      ]
+                    },
+                    {
+                      "Mutate": "SelectFromArray",
+                      "Select": {
+                        "Mutate": "Clamp",
+                        "Value": {
+                          "Mutate": "Subtract",
+                          "A": {
+                            "Var": "VBMaxBomberAlive"
+                          },
+                          "B": {
+                            "Mutate": "EnemyCount",
+                            "EDs": [
+                              "ED_Bomber_ParadiseMainVB",
+                              "ED_Bomber_Ice_ParadiseMainVB",
+                              "ED_Bomber_Explosive_ParadiseMainVB"
+                            ]
+                          }
+                        },
+                        "Min": 0,
+                        "Max": 2
+                      },
+                      "Array": [
+                        "None",
+                        "ED_Bomber_Ice_ParadiseMainVB|1",
+                        "ED_Bomber_Ice_ParadiseMainVB|2"
+                      ]
+                    },
+                    {
+                      "Mutate": "SelectFromArray",
+                      "Select": {
+                        "Mutate": "Clamp",
+                        "Value": {
+                          "Mutate": "Subtract",
+                          "A": {
+                            "Var": "VBMaxBomberAlive"
+                          },
+                          "B": {
+                            "Mutate": "EnemyCount",
+                            "EDs": [
+                              "ED_Bomber_ParadiseMainVB",
+                              "ED_Bomber_Ice_ParadiseMainVB",
+                              "ED_Bomber_Explosive_ParadiseMainVB"
+                            ]
+                          }
+                        },
+                        "Min": 0,
+                        "Max": 2
+                      },
+                      "Array": [
+                        "None",
+                        "ED_Bomber_Explosive_ParadiseMainVB|1",
+                        "ED_Bomber_Explosive_ParadiseMainVB|2"
+                      ]
+                    }
+                  ],
+                  "Weights": [
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                {
+                  "Mutate": "SelectFromArray",
+                  "Select": {
+                    "Mutate": "Clamp",
+                    "Value": {
+                      "Mutate": "Subtract",
+                      "A": {
+                        "Var": "VBMaxMenaceAlive"
+                      },
+                      "B": {
+                        "Mutate": "EnemyCount",
+                        "EDs": [
+                          "ED_Spider_RapidShooter_ParadiseMainVB"
+                        ]
+                      }
+                    },
+                    "Min": 0,
+                    "Max": 2
+                  },
+                  "Array": [
+                    "None",
+                    "ED_Spider_RapidShooter_ParadiseMainVB|1",
+                    "ED_Spider_RapidShooter_ParadiseMainVB|2"
+                  ]
+                },
+                {
+                  "Mutate": "If",
+                  "Condition": {
+                    "Mutate": "IfFloat",
+                    "Value": {
+                      "Mutate": "Add",
+                      "W0": {
+                        "Mutate": "IfFloat",
+                        "Value": {
+                          "Mutate": "EnemyCount",
+                          "EDs": [
+                            "ED_Spider_ExploderTank_ParadiseMainVB"
+                          ]
+                        },
+                        "<": {
+                          "Var": "VBMaxBulkAlive"
+                        },
+                        "Then": 1,
+                        "Else": 0
+                      },
+                      "W1": {
+                        "Mutate": "IfFloat",
+                        "Value": {
+                          "Mutate": "EnemyCount",
+                          "EDs": [
+                            "XED_Paradise_MainVBMiniBulkPair",
+                            "XED_Paradise_MainVBMiniBulkCompanion"
+                          ]
+                        },
+                        "<": {
+                          "Var": "VBMaxMiniBulkAlive"
+                        },
+                        "Then": 1,
+                        "Else": 0
+                      }
+                    },
+                    ">": 0,
+                    "Then": true,
+                    "Else": false
+                  },
+                  "Then": {
+                    "Mutate": "RandomChoice",
+                    "Choices": [
+                      {
+                        "Mutate": "SelectFromArray",
+                        "Select": {
+                          "Mutate": "Clamp",
+                          "Value": {
+                            "Mutate": "Subtract",
+                            "A": {
+                              "Var": "VBMaxBulkAlive"
+                            },
+                            "B": {
+                              "Mutate": "EnemyCount",
+                              "EDs": [
+                                "ED_Spider_ExploderTank_ParadiseMainVB"
+                              ]
+                            }
+                          },
+                          "Min": 0,
+                          "Max": 1
+                        },
+                        "Array": [
+                          "None",
+                          "ED_Spider_ExploderTank_ParadiseMainVB|1"
+                        ]
+                      },
+                      {
+                        "Mutate": "SelectFromArray",
+                        "Select": {
+                          "Mutate": "Clamp",
+                          "Value": {
+                            "Mutate": "Subtract",
+                            "A": {
+                              "Var": "VBMaxMiniBulkAlive"
+                            },
+                            "B": {
+                              "Mutate": "EnemyCount",
+                              "EDs": [
+                                "XED_Paradise_MainVBMiniBulkPair",
+                                "XED_Paradise_MainVBMiniBulkCompanion"
+                              ]
+                            }
+                          },
+                          "Min": 0,
+                          "Max": 2
+                        },
+                        "Array": [
+                          "None",
+                          "XED_Paradise_MainVBMiniBulkPair|1",
+                          "XED_Paradise_MainVBMiniBulkPair|2"
+                        ]
+                      }
+                    ],
+                    "Weights": [
+                      {
+                        "Mutate": "IfFloat",
+                        "Value": {
+                          "Mutate": "EnemyCount",
+                          "EDs": [
+                            "ED_Spider_ExploderTank_ParadiseMainVB"
+                          ]
+                        },
+                        "<": {
+                          "Var": "VBMaxBulkAlive"
+                        },
+                        "Then": 1,
+                        "Else": 0
+                      },
+                      {
+                        "Mutate": "IfFloat",
+                        "Value": {
+                          "Mutate": "EnemyCount",
+                          "EDs": [
+                            "XED_Paradise_MainVBMiniBulkPair",
+                            "XED_Paradise_MainVBMiniBulkCompanion"
+                          ]
+                        },
+                        "<": {
+                          "Var": "VBMaxMiniBulkAlive"
+                        },
+                        "Then": 1,
+                        "Else": 0
+                      }
+                    ]
+                  },
+                  "Else": "None"
+                }
+              ],
+              "Weights": [
+                {
+                  "Mutate": "Select",
+                  "Select": {
+                    "Var": "VBLastMainTarget"
+                  },
+                  "Default": {
+                    "Mutate": "IfFloat",
+                    "Value": {
+                      "Mutate": "EnemyCount",
+                      "EDs": [
+                        "ED_Grabber_ParadiseMainVB"
+                      ]
+                    },
+                    "<": {
+                      "Var": "VBMaxGrabberAlive"
+                    },
+                    "Then": 20,
+                    "Else": 0
+                  },
+                  "Grabber": 0
+                },
+                {
+                  "Mutate": "Select",
+                  "Select": {
+                    "Var": "VBLastMainTarget"
+                  },
+                  "Default": {
+                    "Mutate": "IfFloat",
+                    "Value": {
+                      "Mutate": "EnemyCount",
+                      "EDs": [
+                        "ED_Spider_Buffer_ParadiseMainVB"
+                      ]
+                    },
+                    "<": {
+                      "Var": "VBMaxWardenAlive"
+                    },
+                    "Then": 20,
+                    "Else": 0
+                  },
+                  "Warden": 0
+                },
+                {
+                  "Mutate": "Select",
+                  "Select": {
+                    "Var": "VBLastMainTarget"
+                  },
+                  "Default": {
+                    "Mutate": "IfFloat",
+                    "Value": {
+                      "Mutate": "EnemyCount",
+                      "EDs": [
+                        "ED_Bomber_ParadiseMainVB",
+                        "ED_Bomber_Ice_ParadiseMainVB",
+                        "ED_Bomber_Explosive_ParadiseMainVB"
+                      ]
+                    },
+                    "<": {
+                      "Var": "VBMaxBomberAlive"
+                    },
+                    "Then": 25,
+                    "Else": 0
+                  },
+                  "Bomber": 0
+                },
+                {
+                  "Mutate": "Select",
+                  "Select": {
+                    "Var": "VBLastMainTarget"
+                  },
+                  "Default": {
+                    "Mutate": "IfFloat",
+                    "Value": {
+                      "Mutate": "EnemyCount",
+                      "EDs": [
+                        "ED_Spider_RapidShooter_ParadiseMainVB"
+                      ]
+                    },
+                    "<": {
+                      "Var": "VBMaxMenaceAlive"
+                    },
+                    "Then": 15,
+                    "Else": 0
+                  },
+                  "Menace": 0
+                },
+                {
+                  "Mutate": "Select",
+                  "Select": {
+                    "Var": "VBLastMainTarget"
+                  },
+                  "Default": {
+                    "Mutate": "If",
+                    "Condition": {
+                      "Mutate": "IfFloat",
+                      "Value": {
+                        "Mutate": "Add",
+                        "W0": {
+                          "Mutate": "IfFloat",
+                          "Value": {
+                            "Mutate": "EnemyCount",
+                            "EDs": [
+                              "ED_Spider_ExploderTank_ParadiseMainVB"
+                            ]
+                          },
+                          "<": {
+                            "Var": "VBMaxBulkAlive"
+                          },
+                          "Then": 1,
+                          "Else": 0
+                        },
+                        "W1": {
+                          "Mutate": "IfFloat",
+                          "Value": {
+                            "Mutate": "EnemyCount",
+                            "EDs": [
+                              "XED_Paradise_MainVBMiniBulkPair",
+                              "XED_Paradise_MainVBMiniBulkCompanion"
+                            ]
+                          },
+                          "<": {
+                            "Var": "VBMaxMiniBulkAlive"
+                          },
+                          "Then": 1,
+                          "Else": 0
+                        }
+                      },
+                      ">": 0,
+                      "Then": true,
+                      "Else": false
+                    },
+                    "Then": 5,
+                    "Else": 0
+                  },
+                  "Bulk": 0
+                }
+              ]
+            },
+            "Else": "None"
+          },
+          {
+            "Mutate": "If",
+            "Condition": {
+              "Mutate": "IfFloat",
+              "Value": {
+                "Mutate": "Add",
+                "W0": {
+                  "Mutate": "Select",
+                  "Select": {
+                    "Var": "VBLastMainTarget"
+                  },
+                  "Default": {
+                    "Mutate": "IfFloat",
+                    "Value": {
+                      "Mutate": "EnemyCount",
+                      "EDs": [
+                        "ED_Grabber_ParadiseMainVB"
+                      ]
+                    },
+                    "<": {
+                      "Var": "VBMaxGrabberAlive"
+                    },
+                    "Then": 20,
+                    "Else": 0
+                  },
+                  "Grabber": 0
+                },
+                "W1": {
+                  "Mutate": "Select",
+                  "Select": {
+                    "Var": "VBLastMainTarget"
+                  },
+                  "Default": {
+                    "Mutate": "IfFloat",
+                    "Value": {
+                      "Mutate": "EnemyCount",
+                      "EDs": [
+                        "ED_Spider_Buffer_ParadiseMainVB"
+                      ]
+                    },
+                    "<": {
+                      "Var": "VBMaxWardenAlive"
+                    },
+                    "Then": 20,
+                    "Else": 0
+                  },
+                  "Warden": 0
+                },
+                "W2": {
+                  "Mutate": "Select",
+                  "Select": {
+                    "Var": "VBLastMainTarget"
+                  },
+                  "Default": {
+                    "Mutate": "IfFloat",
+                    "Value": {
+                      "Mutate": "EnemyCount",
+                      "EDs": [
+                        "ED_Bomber_ParadiseMainVB",
+                        "ED_Bomber_Ice_ParadiseMainVB",
+                        "ED_Bomber_Explosive_ParadiseMainVB"
+                      ]
+                    },
+                    "<": {
+                      "Var": "VBMaxBomberAlive"
+                    },
+                    "Then": 25,
+                    "Else": 0
+                  },
+                  "Bomber": 0
+                },
+                "W3": {
+                  "Mutate": "Select",
+                  "Select": {
+                    "Var": "VBLastMainTarget"
+                  },
+                  "Default": {
+                    "Mutate": "IfFloat",
+                    "Value": {
+                      "Mutate": "EnemyCount",
+                      "EDs": [
+                        "ED_Spider_RapidShooter_ParadiseMainVB"
+                      ]
+                    },
+                    "<": {
+                      "Var": "VBMaxMenaceAlive"
+                    },
+                    "Then": 15,
+                    "Else": 0
+                  },
+                  "Menace": 0
+                },
+                "W4": {
+                  "Mutate": "Select",
+                  "Select": {
+                    "Var": "VBLastMainTarget"
+                  },
+                  "Default": {
+                    "Mutate": "If",
+                    "Condition": {
+                      "Mutate": "IfFloat",
+                      "Value": {
+                        "Mutate": "Add",
+                        "W0": {
+                          "Mutate": "IfFloat",
+                          "Value": {
+                            "Mutate": "EnemyCount",
+                            "EDs": [
+                              "ED_Spider_ExploderTank_ParadiseMainVB"
+                            ]
+                          },
+                          "<": {
+                            "Var": "VBMaxBulkAlive"
+                          },
+                          "Then": 1,
+                          "Else": 0
+                        },
+                        "W1": {
+                          "Mutate": "IfFloat",
+                          "Value": {
+                            "Mutate": "EnemyCount",
+                            "EDs": [
+                              "XED_Paradise_MainVBMiniBulkPair",
+                              "XED_Paradise_MainVBMiniBulkCompanion"
+                            ]
+                          },
+                          "<": {
+                            "Var": "VBMaxMiniBulkAlive"
+                          },
+                          "Then": 1,
+                          "Else": 0
+                        }
+                      },
+                      ">": 0,
+                      "Then": true,
+                      "Else": false
+                    },
+                    "Then": 5,
+                    "Else": 0
+                  },
+                  "Bulk": 0
+                }
+              },
+              ">": 0,
+              "Then": true,
+              "Else": false
+            },
+            "Then": {
+              "Mutate": "RandomChoice",
+              "Choices": [
+                {
+                  "Mutate": "SelectFromArray",
+                  "Select": {
+                    "Mutate": "Clamp",
+                    "Value": {
+                      "Mutate": "Subtract",
+                      "A": {
+                        "Var": "VBMaxGrabberAlive"
+                      },
+                      "B": {
+                        "Mutate": "EnemyCount",
+                        "EDs": [
+                          "ED_Grabber_ParadiseMainVB"
+                        ]
+                      }
+                    },
+                    "Min": 0,
+                    "Max": 3
+                  },
+                  "Array": [
+                    "None",
+                    "ED_Grabber_ParadiseMainVB|1",
+                    "ED_Grabber_ParadiseMainVB|2",
+                    "ED_Grabber_ParadiseMainVB|3"
+                  ]
+                },
+                {
+                  "Mutate": "SelectFromArray",
+                  "Select": {
+                    "Mutate": "Clamp",
+                    "Value": {
+                      "Mutate": "Subtract",
+                      "A": {
+                        "Var": "VBMaxWardenAlive"
+                      },
+                      "B": {
+                        "Mutate": "EnemyCount",
+                        "EDs": [
+                          "ED_Spider_Buffer_ParadiseMainVB"
+                        ]
+                      }
+                    },
+                    "Min": 0,
+                    "Max": 3
+                  },
+                  "Array": [
+                    "None",
+                    "ED_Spider_Buffer_ParadiseMainVB|1",
+                    "ED_Spider_Buffer_ParadiseMainVB|2",
+                    "ED_Spider_Buffer_ParadiseMainVB|3"
+                  ]
+                },
+                {
+                  "Mutate": "RandomChoice",
+                  "Choices": [
+                    {
+                      "Mutate": "SelectFromArray",
+                      "Select": {
+                        "Mutate": "Clamp",
+                        "Value": {
+                          "Mutate": "Subtract",
+                          "A": {
+                            "Var": "VBMaxBomberAlive"
+                          },
+                          "B": {
+                            "Mutate": "EnemyCount",
+                            "EDs": [
+                              "ED_Bomber_ParadiseMainVB",
+                              "ED_Bomber_Ice_ParadiseMainVB",
+                              "ED_Bomber_Explosive_ParadiseMainVB"
+                            ]
+                          }
+                        },
+                        "Min": 0,
+                        "Max": 3
+                      },
+                      "Array": [
+                        "None",
+                        "ED_Bomber_ParadiseMainVB|1",
+                        "ED_Bomber_ParadiseMainVB|2",
+                        "ED_Bomber_ParadiseMainVB|3"
+                      ]
+                    },
+                    {
+                      "Mutate": "SelectFromArray",
+                      "Select": {
+                        "Mutate": "Clamp",
+                        "Value": {
+                          "Mutate": "Subtract",
+                          "A": {
+                            "Var": "VBMaxBomberAlive"
+                          },
+                          "B": {
+                            "Mutate": "EnemyCount",
+                            "EDs": [
+                              "ED_Bomber_ParadiseMainVB",
+                              "ED_Bomber_Ice_ParadiseMainVB",
+                              "ED_Bomber_Explosive_ParadiseMainVB"
+                            ]
+                          }
+                        },
+                        "Min": 0,
+                        "Max": 3
+                      },
+                      "Array": [
+                        "None",
+                        "ED_Bomber_Ice_ParadiseMainVB|1",
+                        "ED_Bomber_Ice_ParadiseMainVB|2",
+                        "ED_Bomber_Ice_ParadiseMainVB|3"
+                      ]
+                    },
+                    {
+                      "Mutate": "SelectFromArray",
+                      "Select": {
+                        "Mutate": "Clamp",
+                        "Value": {
+                          "Mutate": "Subtract",
+                          "A": {
+                            "Var": "VBMaxBomberAlive"
+                          },
+                          "B": {
+                            "Mutate": "EnemyCount",
+                            "EDs": [
+                              "ED_Bomber_ParadiseMainVB",
+                              "ED_Bomber_Ice_ParadiseMainVB",
+                              "ED_Bomber_Explosive_ParadiseMainVB"
+                            ]
+                          }
+                        },
+                        "Min": 0,
+                        "Max": 3
+                      },
+                      "Array": [
+                        "None",
+                        "ED_Bomber_Explosive_ParadiseMainVB|1",
+                        "ED_Bomber_Explosive_ParadiseMainVB|2",
+                        "ED_Bomber_Explosive_ParadiseMainVB|3"
+                      ]
+                    }
+                  ],
+                  "Weights": [
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                {
+                  "Mutate": "SelectFromArray",
+                  "Select": {
+                    "Mutate": "Clamp",
+                    "Value": {
+                      "Mutate": "Subtract",
+                      "A": {
+                        "Var": "VBMaxMenaceAlive"
+                      },
+                      "B": {
+                        "Mutate": "EnemyCount",
+                        "EDs": [
+                          "ED_Spider_RapidShooter_ParadiseMainVB"
+                        ]
+                      }
+                    },
+                    "Min": 0,
+                    "Max": 3
+                  },
+                  "Array": [
+                    "None",
+                    "ED_Spider_RapidShooter_ParadiseMainVB|1",
+                    "ED_Spider_RapidShooter_ParadiseMainVB|2",
+                    "ED_Spider_RapidShooter_ParadiseMainVB|3"
+                  ]
+                },
+                {
+                  "Mutate": "If",
+                  "Condition": {
+                    "Mutate": "IfFloat",
+                    "Value": {
+                      "Mutate": "Add",
+                      "W0": {
+                        "Mutate": "IfFloat",
+                        "Value": {
+                          "Mutate": "EnemyCount",
+                          "EDs": [
+                            "ED_Spider_ExploderTank_ParadiseMainVB"
+                          ]
+                        },
+                        "<": {
+                          "Var": "VBMaxBulkAlive"
+                        },
+                        "Then": 1,
+                        "Else": 0
+                      },
+                      "W1": {
+                        "Mutate": "IfFloat",
+                        "Value": {
+                          "Mutate": "EnemyCount",
+                          "EDs": [
+                            "XED_Paradise_MainVBMiniBulkPair",
+                            "XED_Paradise_MainVBMiniBulkCompanion"
+                          ]
+                        },
+                        "<": {
+                          "Var": "VBMaxMiniBulkAlive"
+                        },
+                        "Then": 1,
+                        "Else": 0
+                      }
+                    },
+                    ">": 0,
+                    "Then": true,
+                    "Else": false
+                  },
+                  "Then": {
+                    "Mutate": "RandomChoice",
+                    "Choices": [
+                      {
+                        "Mutate": "SelectFromArray",
+                        "Select": {
+                          "Mutate": "Clamp",
+                          "Value": {
+                            "Mutate": "Subtract",
+                            "A": {
+                              "Var": "VBMaxBulkAlive"
+                            },
+                            "B": {
+                              "Mutate": "EnemyCount",
+                              "EDs": [
+                                "ED_Spider_ExploderTank_ParadiseMainVB"
+                              ]
+                            }
+                          },
+                          "Min": 0,
+                          "Max": 2
+                        },
+                        "Array": [
+                          "None",
+                          "ED_Spider_ExploderTank_ParadiseMainVB|1",
+                          "ED_Spider_ExploderTank_ParadiseMainVB|2"
+                        ]
+                      },
+                      {
+                        "Mutate": "SelectFromArray",
+                        "Select": {
+                          "Mutate": "Clamp",
+                          "Value": {
+                            "Mutate": "Subtract",
+                            "A": {
+                              "Var": "VBMaxMiniBulkAlive"
+                            },
+                            "B": {
+                              "Mutate": "EnemyCount",
+                              "EDs": [
+                                "XED_Paradise_MainVBMiniBulkPair",
+                                "XED_Paradise_MainVBMiniBulkCompanion"
+                              ]
+                            }
+                          },
+                          "Min": 0,
+                          "Max": 4
+                        },
+                        "Array": [
+                          "None",
+                          "XED_Paradise_MainVBMiniBulkPair|1",
+                          "XED_Paradise_MainVBMiniBulkPair|2",
+                          "XED_Paradise_MainVBMiniBulkPair|3",
+                          "XED_Paradise_MainVBMiniBulkPair|4"
+                        ]
+                      }
+                    ],
+                    "Weights": [
+                      {
+                        "Mutate": "IfFloat",
+                        "Value": {
+                          "Mutate": "EnemyCount",
+                          "EDs": [
+                            "ED_Spider_ExploderTank_ParadiseMainVB"
+                          ]
+                        },
+                        "<": {
+                          "Var": "VBMaxBulkAlive"
+                        },
+                        "Then": 1,
+                        "Else": 0
+                      },
+                      {
+                        "Mutate": "IfFloat",
+                        "Value": {
+                          "Mutate": "EnemyCount",
+                          "EDs": [
+                            "XED_Paradise_MainVBMiniBulkPair",
+                            "XED_Paradise_MainVBMiniBulkCompanion"
+                          ]
+                        },
+                        "<": {
+                          "Var": "VBMaxMiniBulkAlive"
+                        },
+                        "Then": 1,
+                        "Else": 0
+                      }
+                    ]
+                  },
+                  "Else": "None"
+                }
+              ],
+              "Weights": [
+                {
+                  "Mutate": "Select",
+                  "Select": {
+                    "Var": "VBLastMainTarget"
+                  },
+                  "Default": {
+                    "Mutate": "IfFloat",
+                    "Value": {
+                      "Mutate": "EnemyCount",
+                      "EDs": [
+                        "ED_Grabber_ParadiseMainVB"
+                      ]
+                    },
+                    "<": {
+                      "Var": "VBMaxGrabberAlive"
+                    },
+                    "Then": 20,
+                    "Else": 0
+                  },
+                  "Grabber": 0
+                },
+                {
+                  "Mutate": "Select",
+                  "Select": {
+                    "Var": "VBLastMainTarget"
+                  },
+                  "Default": {
+                    "Mutate": "IfFloat",
+                    "Value": {
+                      "Mutate": "EnemyCount",
+                      "EDs": [
+                        "ED_Spider_Buffer_ParadiseMainVB"
+                      ]
+                    },
+                    "<": {
+                      "Var": "VBMaxWardenAlive"
+                    },
+                    "Then": 20,
+                    "Else": 0
+                  },
+                  "Warden": 0
+                },
+                {
+                  "Mutate": "Select",
+                  "Select": {
+                    "Var": "VBLastMainTarget"
+                  },
+                  "Default": {
+                    "Mutate": "IfFloat",
+                    "Value": {
+                      "Mutate": "EnemyCount",
+                      "EDs": [
+                        "ED_Bomber_ParadiseMainVB",
+                        "ED_Bomber_Ice_ParadiseMainVB",
+                        "ED_Bomber_Explosive_ParadiseMainVB"
+                      ]
+                    },
+                    "<": {
+                      "Var": "VBMaxBomberAlive"
+                    },
+                    "Then": 25,
+                    "Else": 0
+                  },
+                  "Bomber": 0
+                },
+                {
+                  "Mutate": "Select",
+                  "Select": {
+                    "Var": "VBLastMainTarget"
+                  },
+                  "Default": {
+                    "Mutate": "IfFloat",
+                    "Value": {
+                      "Mutate": "EnemyCount",
+                      "EDs": [
+                        "ED_Spider_RapidShooter_ParadiseMainVB"
+                      ]
+                    },
+                    "<": {
+                      "Var": "VBMaxMenaceAlive"
+                    },
+                    "Then": 15,
+                    "Else": 0
+                  },
+                  "Menace": 0
+                },
+                {
+                  "Mutate": "Select",
+                  "Select": {
+                    "Var": "VBLastMainTarget"
+                  },
+                  "Default": {
+                    "Mutate": "If",
+                    "Condition": {
+                      "Mutate": "IfFloat",
+                      "Value": {
+                        "Mutate": "Add",
+                        "W0": {
+                          "Mutate": "IfFloat",
+                          "Value": {
+                            "Mutate": "EnemyCount",
+                            "EDs": [
+                              "ED_Spider_ExploderTank_ParadiseMainVB"
+                            ]
+                          },
+                          "<": {
+                            "Var": "VBMaxBulkAlive"
+                          },
+                          "Then": 1,
+                          "Else": 0
+                        },
+                        "W1": {
+                          "Mutate": "IfFloat",
+                          "Value": {
+                            "Mutate": "EnemyCount",
+                            "EDs": [
+                              "XED_Paradise_MainVBMiniBulkPair",
+                              "XED_Paradise_MainVBMiniBulkCompanion"
+                            ]
+                          },
+                          "<": {
+                            "Var": "VBMaxMiniBulkAlive"
+                          },
+                          "Then": 1,
+                          "Else": 0
+                        }
+                      },
+                      ">": 0,
+                      "Then": true,
+                      "Else": false
+                    },
+                    "Then": 5,
+                    "Else": 0
+                  },
+                  "Bulk": 0
+                }
+              ]
+            },
+            "Else": "None"
+          }
+        ],
+        "Weights": [
+          {
+            "Mutate": "Subtract",
+            "A": 1,
+            "B": {
+              "Mutate": "Clamp",
+              "Value": {
+                "Var": "VBExtraSpawnProbability"
+              },
+              "Min": 0,
+              "Max": 1
+            }
+          },
+          {
+            "Mutate": "Clamp",
+            "Value": {
+              "Var": "VBExtraSpawnProbability"
+            },
+            "Min": 0,
+            "Max": 1
+          }
+        ]
+      }
+    },
+    "VBLastMainTarget": {
+      "Type": "String",
+      "Watch": false,
+      "Value": {
+        "Mutate": "LockString",
+        "Update": {
+          "Mutate": "IfFloat",
+          "Value": {
+            "Mutate": "EnemiesRecentlySpawned",
+            "Seconds": 4,
+            "EDs": [
+              "ED_Grabber_ParadiseMainVB",
+              "ED_Spider_Buffer_ParadiseMainVB",
+              "ED_Bomber_ParadiseMainVB",
+              "ED_Bomber_Ice_ParadiseMainVB",
+              "ED_Bomber_Explosive_ParadiseMainVB",
+              "ED_Spider_RapidShooter_ParadiseMainVB",
+              "ED_Spider_ExploderTank_ParadiseMainVB",
+              "XED_Paradise_MainVBMiniBulkPair",
+              "XED_Paradise_MainVBMiniBulkCompanion"
+            ]
+          },
+          ">": 0,
+          "Then": true,
+          "Else": false
+        },
+        "Value": {
+          "Mutate": "If",
+          "Condition": {
+            "Mutate": "IfFloat",
+            "Value": {
+              "Mutate": "EnemiesRecentlySpawned",
+              "Seconds": 4,
+              "EDs": [
+                "ED_Grabber_ParadiseMainVB"
+              ]
+            },
+            ">": 0,
+            "Then": true,
+            "Else": false
+          },
+          "Then": "Grabber",
+          "Else": {
+            "Mutate": "If",
+            "Condition": {
+              "Mutate": "IfFloat",
+              "Value": {
+                "Mutate": "EnemiesRecentlySpawned",
+                "Seconds": 4,
+                "EDs": [
+                  "ED_Spider_Buffer_ParadiseMainVB"
+                ]
+              },
+              ">": 0,
+              "Then": true,
+              "Else": false
+            },
+            "Then": "Warden",
+            "Else": {
+              "Mutate": "If",
+              "Condition": {
+                "Mutate": "IfFloat",
+                "Value": {
+                  "Mutate": "EnemiesRecentlySpawned",
+                  "Seconds": 4,
+                  "EDs": [
+                    "ED_Bomber_ParadiseMainVB",
+                    "ED_Bomber_Ice_ParadiseMainVB",
+                    "ED_Bomber_Explosive_ParadiseMainVB"
+                  ]
+                },
+                ">": 0,
+                "Then": true,
+                "Else": false
+              },
+              "Then": "Bomber",
+              "Else": {
+                "Mutate": "If",
+                "Condition": {
+                  "Mutate": "IfFloat",
+                  "Value": {
+                    "Mutate": "EnemiesRecentlySpawned",
+                    "Seconds": 4,
+                    "EDs": [
+                      "ED_Spider_RapidShooter_ParadiseMainVB"
+                    ]
+                  },
+                  ">": 0,
+                  "Then": true,
+                  "Else": false
+                },
+                "Then": "Menace",
+                "Else": {
+                  "Mutate": "If",
+                  "Condition": {
+                    "Mutate": "IfFloat",
+                    "Value": {
+                      "Mutate": "EnemiesRecentlySpawned",
+                      "Seconds": 4,
+                      "EDs": [
+                        "ED_Spider_ExploderTank_ParadiseMainVB",
+                        "XED_Paradise_MainVBMiniBulkPair",
+                        "XED_Paradise_MainVBMiniBulkCompanion"
+                      ]
+                    },
+                    ">": 0,
+                    "Then": true,
+                    "Else": false
+                  },
+                  "Then": "Bulk",
+                  "Else": "None"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "Caps": {
+    "MaxActiveSwarmers": [
+      90,
+      150,
+      210,
+      240
+    ],
+    "MaxActiveEnemies": [
+      90,
+      150,
+      210,
+      240
+    ]
+  },
+  "Dwarves": {
+    "Test": true,
+    "RegenHealthPerSecond": 4.35,
+    "RegenDelayAfterDamage": 6
+  },
+  "Resupply": {
+    "Cost": {
+      "Mutate": "ByResuppliesCalled",
+      "Values": [
+        40,
+        50,
+        60
+      ]
+    }
+  },
+  "Salvage": {
+    "Uplink": {
+      "DisableLeaveShout": true,
+      "LeavePenaltyMultiplier": [
+        0.75,
+        1
+      ]
+    },
+    "Refuel": {
+      "DisableLeaveShout": true,
+      "LeavePenaltyMultiplier": [
+        0.75,
+        1
+      ]
+    }
+  },
+  "Darkness": {
+    "FlashlightStrength": {
+      "Mutate": "IfFloat",
+      "Value": {
+        "Mutate": "ScoutCount"
+      },
+      ">=": 1,
+      "Then": 1,
+      "Else": {
+        "Mutate": "ByPlayerCount",
+        "Values": [
+          1.5,
+          1.5,
+          1.25
+        ]
+      }
+    },
+    "FlareStrength": {
+      "Mutate": "IfFloat",
+      "Value": {
+        "Mutate": "ScoutCount"
+      },
+      ">=": 1,
+      "Then": 1,
+      "Else": {
+        "Mutate": "ByPlayerCount",
+        "Values": [
+          1.5,
+          1.5,
+          1.25
+        ]
+      }
+    },
+    "PlayerIllumination": {
+      "Mutate": "IfFloat",
+      "Value": {
+        "Mutate": "ScoutCount"
+      },
+      ">=": 1,
+      "Then": 1,
+      "Else": {
+        "Mutate": "ByPlayerCount",
+        "Values": [
+          1.5,
+          1.5,
+          1.25
+        ]
+      }
+    },
+    "EnvironmentalLight": {
+      "Mutate": "IfFloat",
+      "Value": {
+        "Mutate": "ScoutCount"
+      },
+      ">=": 1,
+      "Then": 1,
+      "Else": {
+        "Mutate": "ByPlayerCount",
+        "Values": [
+          1.5,
+          1.5,
+          1.25
+        ]
+      }
+    }
+  },
+  "Pools": {
+    "MinPoolSize": 30,
+    "DisruptiveEnemyPoolCount": {
+      "Min": 10,
+      "Max": 10
+    },
+    "StationaryEnemyCount": {
+      "Min": 13,
+      "Max": 13
+    },
+    "EnemyPool": {
+      "Add": [
+        "ED_Spider_Grunt",
+        {
+          "Mutate": "If",
+          "Condition": {
+            "Mutate": "DuringEncounters"
+          },
+          "Then": [
+            "ED_Spider_Tank_Enc"
+          ],
+          "Else": [
+            "ED_Spider_Tank_Wave"
+          ]
+        },
+        "ED_Spider_RapidShooter",
+        "ED_Spider_Buffer",
+        {
+          "Mutate": "ByPlayerCount",
+          "Values": [
+            {
+              "Mutate": "If",
+              "Condition": {
+                "Mutate": "Or",
+                "A": {
+                  "Mutate": "DuringDrillevator"
+                },
+                "B": {
+                  "Mutate": "DuringDefend"
+                }
+              },
+              "Then": [],
+              "Else": {
+                "Mutate": "EnemyCooldown",
+                "EDs": [
+                  "ED_Spider_ExploderTank",
+                  "ED_Spider_ExploderTank_ParadiseMainVB"
+                ],
+                "CooldownTime": 480,
+                "ValueDuringCooldown": [],
+                "DefaultValue": [
+                  "ED_Spider_ExploderTank"
+                ]
+              }
+            },
+            {
+              "Mutate": "If",
+              "Condition": {
+                "Mutate": "Or",
+                "A": {
+                  "Mutate": "DuringDrillevator"
+                },
+                "B": {
+                  "Mutate": "DuringDefend"
+                }
+              },
+              "Then": [],
+              "Else": [
+                "ED_Spider_ExploderTank"
+              ]
+            },
+            [
+              "ED_Spider_ExploderTank"
+            ]
+          ]
+        },
+        {
+          "Mutate": "ByPlayerCount",
+          "Values": [
+            [],
+            [
+              "ED_Spider_Stinger"
+            ]
+          ]
+        },
+        {
+          "Mutate": "ByPlayerCount",
+          "Values": [
+            [],
+            {
+              "Mutate": "EnemyCooldown",
+              "EDs": [
+                "ED_Spider_Stalker"
+              ],
+              "CooldownTime": 240,
+              "ValueDuringCooldown": [],
+              "DefaultValue": [
+                "ED_Spider_Stalker"
+              ]
+            }
+          ]
+        },
+        {
+          "Mutate": "If",
+          "Condition": {
+            "Mutate": "DuringDrillevator"
+          },
+          "Then": [],
+          "Else": [
+            "ED_Woodlouse"
+          ]
+        },
+        "ED_Grabber",
+        "ED_Bomber",
+        "ED_Spider_Swarmer",
+        {
+          "Mutate": "If",
+          "Condition": {
+            "Mutate": "DuringMission",
+            "StartingAt": 25
+          },
+          "Then": [],
+          "Else": {
+            "Mutate": "ByMissionType",
+            "Default": [],
+            "PE": [
+              "ED_Spider_Exploder"
+            ],
+            "DeepScan": [
+              "ED_Spider_Exploder"
+            ]
+          }
+        },
+        "ED_Spider_Spitter",
+        "ED_Spider_Shooter",
+        "ED_Spider_Lobber",
+        "ED_Mactera_Shooter_Normal",
+        "ED_Mactera_TripleShooter",
+        {
+          "Mutate": "ByBiome",
+          "Default": [],
+          "Sandblasted": [
+            "ED_Shark"
+          ]
+        },
+        {
+          "Mutate": "ByBiome",
+          "Default": [],
+          "SaltPits": {
+            "Mutate": "If",
+            "Condition": {
+              "Mutate": "DuringDrillevator"
+            },
+            "Then": [],
+            "Else": {
+              "Mutate": "EnemyCooldown",
+              "EDs": [
+                "ED_Woodlouse_Youngling"
+              ],
+              "CooldownTime": 240,
+              "ValueDuringCooldown": [],
+              "DefaultValue": [
+                "ED_Woodlouse_Youngling"
+              ]
+            }
+          }
+        },
+        {
+          "Mutate": "ByBiome",
+          "Default": [],
+          "DenseBiozone": [
+            "ED_Jelly_Swarmer"
+          ],
+          "GlacialStrata": [
+            "ED_Jelly_Swarmer"
+          ]
+        }
+      ],
+      "Remove": [
+        "ED_Spider_Grunt",
+        "ED_Spider_Tank",
+        "ED_Woodlouse_Youngling",
+        "ED_Jelly_Swarmer",
+        "ED_Shark"
+      ]
+    },
+    "DisruptiveEnemies": {
+      "Clear": true,
+      "Add": []
+    },
+    "SpecialEnemies": {
+      "Clear": true,
+      "Add": []
+    },
+    "StationaryPool": {
+      "Add": [
+        "ED_Sprout_Normal",
+        "ED_ShootingPlant_NukeSingle",
+        "ED_Sniper_Turret_Slow_Rocket",
+        "ED_CaveLeech_fat",
+        {
+          "Mutate": "ByMissionType",
+          "Default": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              [
+                "ED_BarrageInfector_Nuker"
+              ],
+              [
+                "ED_BarrageInfector_Nuker"
+              ]
+            ]
+          },
+          "Refinery": [],
+          "Escort": []
+        },
+        "ED_Drone_Breeder",
+        {
+          "Mutate": "ByMissionType",
+          "Default": [
+            "ED_Babel"
+          ],
+          "Escort": []
+        }
+      ],
+      "Remove": [
+        "ED_PitJaw"
+      ]
+    }
+  },
+  "DifficultySetting": {
+    "BaseHazard": "Hazard 5",
+    "ExtraLargeEnemyDamageResistance": [
+      1,
+      1.3,
+      1.7,
+      2.1
+    ],
+    "ExtraLargeEnemyDamageResistanceB": [
+      1,
+      1.3,
+      1.5,
+      1.7
+    ],
+    "ExtraLargeEnemyDamageResistanceC": [
+      1,
+      1.3,
+      1.7,
+      2.1
+    ],
+    "ExtraLargeEnemyDamageResistanceD": [
+      1.5,
+      1.55,
+      1.75,
+      1.9
+    ],
+    "EnemyDamageResistance": [
+      1.4,
+      1.5,
+      1.6,
+      1.75
+    ],
+    "EnemyDamageModifier": [
+      3.3,
+      3.65,
+      3.9,
+      4.1
+    ],
+    "EnemyCountModifier": {
+      "Mutate": "Multiply",
+      "A": {
+        "Mutate": "ByPlayerCount",
+        "Values": [
+          1.9,
+          2.1,
+          2.7,
+          3.3
+        ]
+      },
+      "B": {
+        "Mutate": "ByMissionType",
+        "Default": 1,
+        "Egg": {
+          "Mutate": "If",
+          "Condition": {
+            "Mutate": "DuringEggAmbush",
+            "StartingAt": 5,
+            "StoppingAfter": 10
+          },
+          "Then": 2,
+          "Else": 1
+        },
+        "Sabotage": {
+          "Mutate": "If",
+          "Condition": {
+            "Mutate": "DuringEncounters"
+          },
+          "Then": 0.667,
+          "Else": 1
+        }
+      }
+    },
+    "EncounterDifficulty": [
+      {
+        "weight": 2,
+        "min": {
+          "Mutate": "ByMissionType",
+          "Default": 550,
+          "Salvage": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              385,
+              550
+            ]
+          },
+          "Refinery": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              385,
+              550
+            ]
+          },
+          "Sabotage": 825
+        },
+        "max": {
+          "Mutate": "ByMissionType",
+          "Default": 650,
+          "Salvage": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              455,
+              650
+            ]
+          },
+          "Refinery": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              455,
+              650
+            ]
+          },
+          "Sabotage": 975
+        }
+      },
+      {
+        "weight": 6,
+        "min": {
+          "Mutate": "ByMissionType",
+          "Default": 450,
+          "Salvage": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              315,
+              450
+            ]
+          },
+          "Refinery": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              315,
+              450
+            ]
+          },
+          "Sabotage": 675
+        },
+        "max": {
+          "Mutate": "ByMissionType",
+          "Default": 750,
+          "Salvage": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              525,
+              750
+            ]
+          },
+          "Refinery": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              525,
+              750
+            ]
+          },
+          "Sabotage": 1125
+        }
+      }
+    ],
+    "StationaryDifficulty": [
+      {
+        "weight": 1,
+        "min": 1150,
+        "max": 1250
+      }
+    ],
+    "EnemyWaveInterval": [
+      {
+        "weight": 7.5,
+        "min": {
+          "Mutate": "ByPlayerCount",
+          "Values": [
+            {
+              "Mutate": "ByMissionType",
+              "Default": 135,
+              "Refinery": {
+                "Mutate": "If",
+                "Condition": {
+                  "Mutate": "DuringMission",
+                  "StartingAt": 200
+                },
+                "Then": 240,
+                "Else": 135
+              }
+            },
+            135
+          ]
+        },
+        "max": {
+          "Mutate": "ByPlayerCount",
+          "Values": [
+            {
+              "Mutate": "ByMissionType",
+              "Default": 155,
+              "Refinery": {
+                "Mutate": "If",
+                "Condition": {
+                  "Mutate": "DuringMission",
+                  "StartingAt": 200
+                },
+                "Then": 240,
+                "Else": 155
+              }
+            },
+            155
+          ]
+        }
+      }
+    ],
+    "EnemyNormalWaveInterval": [
+      {
+        "weight": 2,
+        "min": 170,
+        "max": 210
+      },
+      {
+        "weight": 1,
+        "min": 180,
+        "max": 190
+      },
+      {
+        "weight": {
+          "Mutate": "ByPlayerCount",
+          "Values": [
+            {
+              "Mutate": "ByMissionType",
+              "Default": 0,
+              "Salvage": {
+                "Mutate": "BySalvagePhase",
+                "Default": 0,
+                "PreUplink": 9999999,
+                "PreRefuel": 9999999
+              }
+            },
+            0
+          ]
+        },
+        "min": 330,
+        "max": 330
+      },
+      {
+        "weight": {
+          "Mutate": "ByPlayerCount",
+          "Values": [
+            0,
+            {
+              "Mutate": "ByMissionType",
+              "Default": 0,
+              "Salvage": {
+                "Mutate": "BySalvagePhase",
+                "Default": 0,
+                "PreRefuel": 9999999
+              }
+            }
+          ]
+        },
+        "min": 270,
+        "max": 270
+      },
+      {
+        "weight": {
+          "Mutate": "ByPlayerCount",
+          "Values": [
+            {
+              "Mutate": "ByMissionType",
+              "Default": 0,
+              "Refinery": {
+                "Mutate": "If",
+                "Condition": {
+                  "Mutate": "DuringMission",
+                  "StartingAt": 200
+                },
+                "Then": 9999999,
+                "Else": 0
+              }
+            },
+            0
+          ]
+        },
+        "min": 210,
+        "max": 210
+      }
+    ],
+    "EnemyNormalWaveDifficulty": [
+      {
+        "weight": 1,
+        "min": {
+          "Mutate": "ByPlayerCount",
+          "Values": [
+            {
+              "Mutate": "ByMissionType",
+              "Default": 550,
+              "Refinery": 660,
+              "Salvage": 660
+            },
+            550
+          ]
+        },
+        "max": {
+          "Mutate": "ByPlayerCount",
+          "Values": [
+            {
+              "Mutate": "ByMissionType",
+              "Default": 650,
+              "Refinery": 760,
+              "Salvage": 760
+            },
+            650
+          ]
+        }
+      }
+    ],
+    "EnemyDiversity": [
+      {
+        "weight": 2,
+        "min": 4,
+        "max": 4
+      },
+      {
+        "weight": 8,
+        "min": 6,
+        "max": 7
+      }
+    ],
+    "StationaryEnemyDiversity": [
+      {
+        "weight": 1,
+        "min": 13,
+        "max": 13
+      }
+    ],
+    "VeteranNormal": [
+      {
+        "weight": 2,
+        "min": 0,
+        "max": 0
+      },
+      {
+        "weight": 2,
+        "min": 0.5,
+        "max": 0.8
+      }
+    ],
+    "VeteranLarge": 0.2,
+    "EnvironmentalDamageModifier": 1.4,
+    "PointExtractionScalar": 1.4,
+    "FriendlyFireModifier": 0.9,
+    "SpeedModifier": {
+      "Mutate": "ByPlayerCount",
+      "Values": [
+        1.3,
+        {
+          "Mutate": "If",
+          "Condition": {
+            "Mutate": "DuringDrillevator"
+          },
+          "Then": 1.675,
+          "Else": 1.3
+        }
+      ]
+    },
+    "AttackCooldownModifier": 1.75,
+    "ProjectileSpeedModifier": 1.9,
+    "HealthRegenerationMax": 0.3,
+    "ReviveHealthRatio": 0.3
+  },
+  "Messages": [
+    {
+      "Send": {
+        "Mutate": "DuringMission",
+        "StartingAt": 15
+      },
+      "Message": "Welcome to Paradise!",
+      "Sender": "dmt",
+      "Type": "Developer"
+    },
+    {
+      "Send": {
+        "Mutate": "DuringMission",
+        "StartingAt": 20
+      },
+      "Message": "Resupplies costs: 40/50/60 nitra",
+      "Sender": "Paradise - 6x2",
+      "Type": "Developer"
+    },
+    {
+      "Send": {
+        "Mutate": "IfFloat",
+        "Value": {
+          "Mutate": "DepositedResource",
+          "Resource": "Nitra"
+        },
+        ">=": {
+          "Mutate": "ByResuppliesCalled",
+          "Values": [
+            40,
+            50,
+            60
+          ]
+        },
+        "Then": true,
+        "Else": false
+      },
+      "Message": {
+        "Mutate": "ByResuppliesCalled",
+        "Values": [
+          "!!! Resupply Available - Next resup = 40 Nitra",
+          "!!! Resupply Available - Next resup = 50 Nitra",
+          "!!! Resupply Available - Next resup = 60 Nitra"
+        ]
+      },
+      "Sender": "Paradise - 6x2",
+      "Type": "Developer"
+    }
+  ],
+  "WaveSpawners": [
+    {
+      "Name": "Main VB target spawner",
+      "Enabled": {
+        "Mutate": "IfFloat",
+        "Value": {
+          "Mutate": "DwarvesDown"
+        },
+        "==": 0,
+        "Then": {
+          "Mutate": "DuringMission",
+          "StartingAt": 20
+        },
+        "Else": false
+      },
+      "Enemies": {
+        "Mutate": "Select",
+        "Select": {
+          "Var": "VBMainRoll"
+        },
+        "Default": [],
+        "ED_Bomber_ParadiseMainVB|1": [
+          "ED_Bomber_ParadiseMainVB"
+        ],
+        "ED_Bomber_ParadiseMainVB|2": [
+          "ED_Bomber_ParadiseMainVB"
+        ],
+        "ED_Bomber_ParadiseMainVB|3": [
+          "ED_Bomber_ParadiseMainVB"
+        ],
+        "ED_Bomber_Ice_ParadiseMainVB|1": [
+          "ED_Bomber_Ice_ParadiseMainVB"
+        ],
+        "ED_Bomber_Ice_ParadiseMainVB|2": [
+          "ED_Bomber_Ice_ParadiseMainVB"
+        ],
+        "ED_Bomber_Ice_ParadiseMainVB|3": [
+          "ED_Bomber_Ice_ParadiseMainVB"
+        ],
+        "ED_Bomber_Explosive_ParadiseMainVB|1": [
+          "ED_Bomber_Explosive_ParadiseMainVB"
+        ],
+        "ED_Bomber_Explosive_ParadiseMainVB|2": [
+          "ED_Bomber_Explosive_ParadiseMainVB"
+        ],
+        "ED_Bomber_Explosive_ParadiseMainVB|3": [
+          "ED_Bomber_Explosive_ParadiseMainVB"
+        ],
+        "ED_Spider_Buffer_ParadiseMainVB|1": [
+          "ED_Spider_Buffer_ParadiseMainVB"
+        ],
+        "ED_Spider_Buffer_ParadiseMainVB|2": [
+          "ED_Spider_Buffer_ParadiseMainVB"
+        ],
+        "ED_Spider_Buffer_ParadiseMainVB|3": [
+          "ED_Spider_Buffer_ParadiseMainVB"
+        ],
+        "ED_Spider_RapidShooter_ParadiseMainVB|1": [
+          "ED_Spider_RapidShooter_ParadiseMainVB"
+        ],
+        "ED_Spider_RapidShooter_ParadiseMainVB|2": [
+          "ED_Spider_RapidShooter_ParadiseMainVB"
+        ],
+        "ED_Spider_RapidShooter_ParadiseMainVB|3": [
+          "ED_Spider_RapidShooter_ParadiseMainVB"
+        ],
+        "ED_Grabber_ParadiseMainVB|1": [
+          "ED_Grabber_ParadiseMainVB"
+        ],
+        "ED_Grabber_ParadiseMainVB|2": [
+          "ED_Grabber_ParadiseMainVB"
+        ],
+        "ED_Grabber_ParadiseMainVB|3": [
+          "ED_Grabber_ParadiseMainVB"
+        ],
+        "ED_Spider_ExploderTank_ParadiseMainVB|1": [
+          "ED_Spider_ExploderTank_ParadiseMainVB"
+        ],
+        "ED_Spider_ExploderTank_ParadiseMainVB|2": [
+          "ED_Spider_ExploderTank_ParadiseMainVB"
+        ],
+        "XED_Paradise_MainVBMiniBulkPair|1": [
+          "XED_Paradise_MainVBMiniBulkPair"
+        ],
+        "XED_Paradise_MainVBMiniBulkPair|2": [
+          "XED_Paradise_MainVBMiniBulkPair"
+        ],
+        "XED_Paradise_MainVBMiniBulkPair|3": [
+          "XED_Paradise_MainVBMiniBulkPair"
+        ],
+        "XED_Paradise_MainVBMiniBulkPair|4": [
+          "XED_Paradise_MainVBMiniBulkPair"
+        ]
+      },
+      "Difficulty": {
+        "Mutate": "Divide",
+        "A": {
+          "Mutate": "Select",
+          "Select": {
+            "Var": "VBMainRoll"
+          },
+          "Default": 0,
+          "ED_Bomber_ParadiseMainVB|1": 95,
+          "ED_Bomber_ParadiseMainVB|2": 190,
+          "ED_Bomber_ParadiseMainVB|3": 285,
+          "ED_Bomber_Ice_ParadiseMainVB|1": 95,
+          "ED_Bomber_Ice_ParadiseMainVB|2": 190,
+          "ED_Bomber_Ice_ParadiseMainVB|3": 285,
+          "ED_Bomber_Explosive_ParadiseMainVB|1": 95,
+          "ED_Bomber_Explosive_ParadiseMainVB|2": 190,
+          "ED_Bomber_Explosive_ParadiseMainVB|3": 285,
+          "ED_Spider_Buffer_ParadiseMainVB|1": 90,
+          "ED_Spider_Buffer_ParadiseMainVB|2": 180,
+          "ED_Spider_Buffer_ParadiseMainVB|3": 270,
+          "ED_Spider_RapidShooter_ParadiseMainVB|1": 95,
+          "ED_Spider_RapidShooter_ParadiseMainVB|2": 190,
+          "ED_Spider_RapidShooter_ParadiseMainVB|3": 285,
+          "ED_Grabber_ParadiseMainVB|1": 95,
+          "ED_Grabber_ParadiseMainVB|2": 190,
+          "ED_Grabber_ParadiseMainVB|3": 285,
+          "ED_Spider_ExploderTank_ParadiseMainVB|1": 120,
+          "ED_Spider_ExploderTank_ParadiseMainVB|2": 240,
+          "XED_Paradise_MainVBMiniBulkPair|1": 110,
+          "XED_Paradise_MainVBMiniBulkPair|2": 220,
+          "XED_Paradise_MainVBMiniBulkPair|3": 330,
+          "XED_Paradise_MainVBMiniBulkPair|4": 440
+        },
+        "B": {
+          "Mutate": "Multiply",
+          "A": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              1.9,
+              2.1,
+              2.7,
+              3.3
+            ]
+          },
+          "B": {
+            "Mutate": "ByMissionType",
+            "Default": 1,
+            "Egg": {
+              "Mutate": "If",
+              "Condition": {
+                "Mutate": "DuringEggAmbush",
+                "StartingAt": 5,
+                "StoppingAfter": 10
+              },
+              "Then": 2,
+              "Else": 1
+            },
+            "Sabotage": {
+              "Mutate": "If",
+              "Condition": {
+                "Mutate": "DuringEncounters"
+              },
+              "Then": 0.667,
+              "Else": 1
+            }
+          }
+        }
+      },
+      "Interval": {
+        "Var": "VBMainIntervalSeconds"
+      },
+      "Distance": 3000,
+      "Locations": 1,
+      "PauseOnDisable": true
+    },
+    {
+      "Name": "Mini-bulk pair on announced swarm",
+      "Enabled": {
+        "Mutate": "DuringGenericSwarm",
+        "StartingAt": 20
+      },
+      "Enemies": [
+        "XED_Paradise_MiniBulkPair"
+      ],
+      "Difficulty": 220,
+      "Interval": 100000000,
+      "Distance": 3000,
+      "Locations": 1,
+      "SpawnOnEnable": true,
+      "PauseOnDisable": false
+    },
+    {
+      "Name": "Mini-bulk pair on egg ambush",
+      "Enabled": {
+        "Mutate": "DuringEggAmbush",
+        "StartingAt": 20
+      },
+      "Enemies": [
+        "XED_Paradise_MiniBulkPair"
+      ],
+      "Difficulty": 220,
+      "Interval": 100000000,
+      "Distance": 3000,
+      "Locations": 1,
+      "SpawnOnEnable": true,
+      "PauseOnDisable": false
+    },
+    {
+      "Name": "DreadNWave",
+      "Enabled": {
+        "Mutate": "DuringDread"
+      },
+      "Enemies": [
+        "ED_Spider_Grunt",
+        "ED_Mactera_Shooter_Normal"
+      ],
+      "Interval": 30,
+      "Difficulty": 70,
+      "Distance": 1500,
+      "Locations": 1
+    },
+    {
+      "Name": "CaretakerNWave",
+      "Enabled": {
+        "Mutate": "BySaboPhase",
+        "Default": false,
+        "Phase1Vent": true,
+        "Phase1Eye": true,
+        "Phase2Vent": true,
+        "Phase2Eye": true,
+        "Phase3Vent": true,
+        "Phase3Eye": true
+      },
+      "Interval": {
+        "Mutate": "RandomChoice",
+        "Choices": [
+          {
+            "Mutate": "Random",
+            "Min": 170,
+            "Max": 210
+          },
+          {
+            "Mutate": "Random",
+            "Min": 180,
+            "Max": 190
+          },
+          240
+        ],
+        "Weights": [
+          2,
+          1,
+          {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              9999999,
+              0
+            ]
+          }
+        ]
+      },
+      "Difficulty": {
+        "Mutate": "Random",
+        "Min": 550,
+        "Max": 650
+      },
+      "Distance": 2500,
+      "Locations": 1
+    }
+  ],
+  "EscortMule": {
+    "FriendlyFireModifier": 0.1,
+    "BigHitDamageModifier": {
+      "Mutate": "ByPlayerCount",
+      "Values": [
+        {
+          "Mutate": "IfFloat",
+          "Value": {
+            "Mutate": "EnemyCount",
+            "EDs": [
+              "ED_Spider_ExploderTank",
+              "ED_Spider_ExploderTank_ParadiseMainVB"
+            ]
+          },
+          ">=": 1,
+          "Then": 0.85,
+          "Else": 0.75
+        },
+        0.75
+      ]
+    },
+    "BigHitDamageReductionThreshold": 0,
+    "NeutralDamageModifier": 0.1
+  },
+  "Enemies": {
+    "ED_Babel": {
+      "Base": "ED_Burst_Turret_Nobase",
+      "Projectile": "PRJ_FlameWall_C",
+      "Temperature": {
+        "DieIfBurning": false,
+        "FreezeTemperature": -100,
+        "BurnTemperature": 50,
+        "DouseFireTemperature": 0,
+        "FozenDamageBonusScale": 3,
+        "CoolingRate": 10
+      },
+      "Resistances": {
+        "FireDamageMultiplier": 1,
+        "DamageMultiplier": [
+          0.8,
+          0.857142857143,
+          0.914285714286,
+          1.0
+        ]
+      },
+      "AttackDamageMultiplier": [
+        0.174242424242,
+        0.157534246575,
+        0.147435897436,
+        0.140243902439
+      ],
+      "MaxSpawnCount": 9999,
+      "MinSpawnCount": 1,
+      "DifficultyRating": 250,
+      "DisplayName": "Tower of Babel",
+      "SpawnAmountModifier": 0.5,
+      "HealthMultiplier": 2,
+      "Scale": 2.5,
+      "Direct": {
+        "Float:BurstInterval": 0.666,
+        "Float:TurretRotationSpeed": 100,
+        "Float:LockonTime": 2,
+        "Float:FireInterval": 0.4,
+        "Float:AimZOffset": 0.0
+      },
+      "Materials": [
+        "M_Plague_MedbayScan",
+        "M_GlobalSkin_RoyalBlue_S05",
+        "M_VanityBase_EyePupil",
+        "M_Greybox_Light_PinkX20",
+        "M_CaveHolo_Transition",
+        "M_CaveHolo_Transition"
+      ]
+    },
+    "ED_BarrageInfector": {
+      "DifficultyRating": {
+        "Default": 200,
+        "Escort": 450,
+        "Mutate": "ByMissionType"
+      },
+      "Resistances": {
+        "DamageMultiplier": [
+          0.8,
+          0.857142857143,
+          0.914285714286,
+          1.0
+        ]
+      },
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ]
+    },
+    "ED_BarrageInfector_Nuker": {
+      "Base": "ED_BarrageInfector",
+      "DisplayName": "Nuke Barrager",
+      "Projectile": "PRJ_Nukebomber_Bomb",
+      "CanBeUsedForConstantPressure": false,
+      "CanBeUsedInEncounters": true,
+      "Materials": [
+        "M_Gunner_PJ_BioHazard_Glow_DLC07",
+        "M_RivalBomb_ImpactBubbleRed",
+        "M_RivalBomb_ImpactBubbleRed",
+        "M_RivalBomb_ImpactBubbleRed"
+      ],
+      "TimeDilation": {
+        "Mutate": "If",
+        "Condition": {
+          "Mutate": "DuringMission",
+          "StartingAt": 20
+        },
+        "Then": 0.333,
+        "Else": 0.25
+      },
+      "MaxSpawnCount": [
+        0,
+        0,
+        1
+      ],
+      "MinSpawnCount": 1,
+      "Rarity": 8,
+      "DifficultyRating": {
+        "Default": 400,
+        "Refinery": {
+          "Mutate": "ByPlayerCount",
+          "Values": [
+            600,
+            450
+          ]
+        },
+        "Escort": 700,
+        "Mutate": "ByMissionType"
+      },
+      "SpawnAmountModifier": [
+        0.35,
+        0.35,
+        0.35
+      ],
+      "Resistances": {
+        "DamageMultiplier": [
+          0.8,
+          0.857142857143,
+          0.914285714286,
+          1.0
+        ]
+      },
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ]
+    },
+    "ED_Bomber": {
+      "Rarity": 8,
+      "CanBeUsedInEncounters": true,
+      "Resistances": {
+        "DamageMultiplier": [
+          0.8,
+          0.857142857143,
+          0.914285714286,
+          1.0
+        ]
+      },
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ]
+    },
+    "ED_Bomber_Explosive": {
+      "Rarity": 8,
+      "DifficultyRating": 95.0,
+      "SpawnAmountModifier": 0.5,
+      "MinSpawnCount": 1,
+      "MaxSpawnCount": 2,
+      "Resistances": {
+        "DamageMultiplier": [
+          0.8,
+          0.857142857143,
+          0.914285714286,
+          1.0
+        ]
+      },
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ]
+    },
+    "ED_Bomber_Explosive_ParadiseMainVB": {
+      "Base": "ED_Bomber_Explosive",
+      "Rarity": 8,
+      "DifficultyRating": 95.0,
+      "SpawnAmountModifier": 0.5,
+      "MinSpawnCount": 1,
+      "MaxSpawnCount": 2,
+      "Resistances": {
+        "DamageMultiplier": [
+          0.8,
+          0.857142857143,
+          0.914285714286,
+          1.0
+        ]
+      },
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ],
+      "CanBeUsedInEncounters": false,
+      "CanBeUsedForConstantPressure": false
+    },
+    "ED_Bomber_Ice": {
+      "Rarity": 8,
+      "DifficultyRating": 95,
+      "Resistances": {
+        "DamageMultiplier": [
+          0.8,
+          0.857142857143,
+          0.914285714286,
+          1.0
+        ]
+      },
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ]
+    },
+    "ED_Bomber_Ice_ParadiseMainVB": {
+      "Base": "ED_Bomber_Ice",
+      "Rarity": 8,
+      "DifficultyRating": 95,
+      "Resistances": {
+        "DamageMultiplier": [
+          0.8,
+          0.857142857143,
+          0.914285714286,
+          1.0
+        ]
+      },
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ],
+      "CanBeUsedInEncounters": false,
+      "CanBeUsedForConstantPressure": false
+    },
+    "ED_Bomber_ParadiseMainVB": {
+      "Base": "ED_Bomber",
+      "Rarity": 8,
+      "CanBeUsedInEncounters": false,
+      "Resistances": {
+        "DamageMultiplier": [
+          0.8,
+          0.857142857143,
+          0.914285714286,
+          1.0
+        ]
+      },
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ],
+      "CanBeUsedForConstantPressure": false
+    },
+    "ED_CaveLeech": {
+      "CaveLeech": {
+        "MaxDropPlayerDuration": 10
+      },
+      "DifficultyRating": 100,
+      "SpawnAmountModifier": 1,
+      "TimeDilation": 2,
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ]
+    },
+    "ED_CaveLeech_fat": {
+      "Base": "ED_CaveLeech",
+      "CanBeUsedForConstantPressure": false,
+      "CanBeUsedInEncounters": true,
+      "CaveLeech": {
+        "MaxDistanceXY": 300000,
+        "MaxDropPlayerDuration": 10
+      },
+      "DifficultyRating": 150,
+      "DisplayName": "Fat Cave Leech",
+      "MaxSpawnCount": 10,
+      "MinSpawnCount": 1,
+      "Rarity": 3,
+      "Resistances": {
+        "DamageMultiplier": 0.167
+      },
+      "Scale": 2,
+      "SpawnAmountModifier": 1,
+      "TimeDilation": 1,
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ]
+    },
+    "ED_Drone_Breeder": {
+      "CanBeUsedForConstantPressure": false,
+      "CanBeUsedInEncounters": true,
+      "DifficultyRating": 145,
+      "MaxSpawnCount": 1,
+      "MinSpawnCount": 1,
+      "Rarity": 8,
+      "Resistances": {
+        "DamageMultiplier": [
+          1.6,
+          1.714285714286,
+          1.828571428571,
+          2.0
+        ]
+      },
+      "SpawnAmountModifier": 0.5,
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ]
+    },
+    "ED_EggSpider": {
+      "MaxSpawnCount": 1,
+      "MinSpawnCount": 1
+    },
+    "ED_FacilityTurret_Barrier": {
+      "Base": "ED_ShootingPlant"
+    },
+    "ED_FlyingSmartRock": {
+      "HealthMultiplier": [
+        0.36,
+        0.48,
+        0.592
+      ],
+      "Resistances": {
+        "DamageMultiplier": 2.083
+      }
+    },
+    "ED_Grabber": {
+      "CanBeUsedInEncounters": true,
+      "Resistances": {
+        "DamageMultiplier": [
+          0.8,
+          0.857142857143,
+          0.914285714286,
+          1.0
+        ]
+      },
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ],
+      "Grabber": {
+        "CarryAcceleration": 4500,
+        "CarrySpeed": 750,
+        "ChaseAcceleration": 4500,
+        "ChaseSpeed": 1125,
+        "FleeAcceleration": 1500,
+        "FleeSpeed": 1200,
+        "WanderingAcceleration": 1500,
+        "WanderingSpeed": 375
+      }
+    },
+    "ED_Grabber_ParadiseMainVB": {
+      "Base": "ED_Grabber",
+      "CanBeUsedInEncounters": false,
+      "Resistances": {
+        "DamageMultiplier": [
+          0.8,
+          0.857142857143,
+          0.914285714286,
+          1.0
+        ]
+      },
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ],
+      "CanBeUsedForConstantPressure": false,
+      "Grabber": {
+        "CarryAcceleration": 4500,
+        "CarrySpeed": 750,
+        "ChaseAcceleration": 4500,
+        "ChaseSpeed": 1125,
+        "FleeAcceleration": 1500,
+        "FleeSpeed": 1200,
+        "WanderingAcceleration": 1500,
+        "WanderingSpeed": 375
+      }
+    },
+    "ED_HydraWeed": {
+      "Base": "ED_PumpkinLootBug"
+    },
+    "ED_InfectedMule": {
+      "Base": "ED_PumpkinLootBug"
+    },
+    "ED_JellyBreeder": {
+      "Resistances": {
+        "DamageMultiplier": [
+          1.6,
+          1.714285714286,
+          1.828571428571,
+          2.0
+        ]
+      },
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ]
+    },
+    "ED_Jelly_Swarmer": {
+      "CanBeUsedInEncounters": false,
+      "Rarity": [
+        10,
+        8
+      ],
+      "MinSpawnCount": 1,
+      "MaxSpawnCount": [
+        5,
+        7,
+        11,
+        15
+      ],
+      "SpawnSpread": [
+        1500,
+        1000,
+        500
+      ],
+      "NoSpawnWithin": 500
+    },
+    "ED_Ossiran_Scrab": {
+      "CanBeUsedForConstantPressure": true,
+      "CanBeUsedInEncounters": true,
+      "DifficultyRating": 35,
+      "MinSpawnCount": 1,
+      "MaxSpawnCount": 20,
+      "Rarity": 5,
+      "SpawnAmountModifier": 0.7
+    },
+    "ED_PatrolBot": {
+      "Temperature": {
+        "FreezeTemperature": -60,
+        "UnfreezeTemperature": -4,
+        "FozenDamageBonusScale": 3
+      },
+      "Direct": {
+        "Float:BumpDamage.Damage": 0,
+        "Float:ImpactCooldown.CoolDownTime": 9999
+      }
+    },
+    "ED_PatrolBot_Caretaker": {
+      "Temperature": {
+        "FreezeTemperature": -60,
+        "UnfreezeTemperature": -4,
+        "FozenDamageBonusScale": 3
+      },
+      "Direct": {
+        "Float:BumpDamage.Damage": 0,
+        "Float:ImpactCooldown.CoolDownTime": 9999
+      }
+    },
+    "ED_PitJaw": {
+      "Base": "ED_Spider_Swarmer"
+    },
+    "ED_Prospector": {
+      "Base": "ED_PumpkinLootBug"
+    },
+    "ED_ShootingPlant": {
+      "DifficultyRating": 100,
+      "Resistances": {
+        "DamageMultiplier": [
+          0.8,
+          0.857142857143,
+          0.914285714286,
+          1.0
+        ]
+      },
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ]
+    },
+    "ED_ShootingPlant_NukeSingle": {
+      "CanBeUsedForConstantPressure": false,
+      "CanBeUsedInEncounters": true,
+      "DifficultyRating": 200,
+      "Materials": [
+        "M_Parasite2_01",
+        "M_Biome_RadioactiveZone_UraniumGlowing",
+        "M_Biome_RadioactiveZone_UraniumGlowing"
+      ],
+      "MaxSpawnCount": 9999,
+      "MinSpawnCount": 1,
+      "Rarity": 1,
+      "SpawnAmountModifier": 1,
+      "Resistances": {
+        "DamageMultiplier": [
+          0.8,
+          0.857142857143,
+          0.914285714286,
+          1.0
+        ]
+      },
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ]
+    },
+    "ED_Shredder": {
+      "MaxSpawnCount": [
+        9,
+        11,
+        15,
+        20
+      ],
+      "MinSpawnCount": 1,
+      "Temperature": {
+        "FreezeTemperature": -60,
+        "UnfreezeTemperature": 999999,
+        "WarmingRate": 30
+      }
+    },
+    "ED_Sniper_Turret_Slow_Rocket": {
+      "Base": "ED_Sniper_Turret_Slow",
+      "CanBeUsedForConstantPressure": false,
+      "CanBeUsedInEncounters": true,
+      "DisplayName": "Rocket Turret",
+      "DifficultyRating": {
+        "Mutate": "ByMissionType",
+        "Default": 70,
+        "Escort": 125
+      },
+      "MaxSpawnCount": {
+        "Mutate": "ByMissionType",
+        "Default": 9999,
+        "Escort": {
+          "Mutate": "ByPlayerCount",
+          "Values": [
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      },
+      "AttackDamageMultiplier": [
+        2.090909090909,
+        1.890410958904,
+        1.769230769231,
+        1.682926829268
+      ],
+      "MinSpawnCount": 1,
+      "Scale": 1.2,
+      "Rarity": 2.25,
+      "HealthMultiplier": 1.5,
+      "Materials": [
+        "M_HairColor_Purple01",
+        "M_Meteor_Glowing",
+        "M_Meteor_Glowing",
+        "M_VanityBase_EyeColor",
+        "M_Meteor_Glowing"
+      ],
+      "SpawnAmountModifier": 0.75,
+      "Temperature": {
+        "FreezeTemperature": -50,
+        "UnfreezeTemperature": 0,
+        "FozenDamageBonusScale": 3
+      },
+      "Projectile": "PRJ_PatrolBotRocket_fast_C"
+    },
+    "ED_SpiderSpawner": {
+      "DifficultyRating": 120,
+      "Resistances": {
+        "FireDamageMultiplier": 3.95,
+        "DamageMultiplier": [
+          0.8,
+          0.857142857143,
+          0.914285714286,
+          1.0
+        ]
+      },
+      "SpawnAmountModifier": 0.5,
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ]
+    },
+    "ED_Spider_Boss_Heavy": {
+      "Temperature": {
+        "BurnTemperature": 100,
+        "DouseFireTemperature": 25,
+        "CoolingRate": 20
+      },
+      "Resistances": {
+        "FireDamageMultiplier": 0.78
+      }
+    },
+    "ED_Spider_Boss_TwinA": {
+      "Temperature": {
+        "BurnTemperature": 100,
+        "DouseFireTemperature": 25,
+        "CoolingRate": 20
+      },
+      "Resistances": {
+        "FireDamageMultiplier": 0.91
+      }
+    },
+    "ED_Spider_Boss_TwinB": {
+      "Temperature": {
+        "BurnTemperature": 100,
+        "DouseFireTemperature": 25,
+        "CoolingRate": 20
+      },
+      "Resistances": {
+        "FireDamageMultiplier": 0.91
+      }
+    },
+    "ED_Spider_Buffer": {
+      "Rarity": 12.311,
+      "Resistances": {
+        "DamageMultiplier": [
+          0.8,
+          0.857142857143,
+          0.914285714286,
+          1.0
+        ]
+      },
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ],
+      "Movement": {
+        "MaxPawnSpeed": {
+          "Mutate": "Divide",
+          "A": 1.35,
+          "B": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              1.3,
+              {
+                "Mutate": "If",
+                "Condition": {
+                  "Mutate": "DuringDrillevator"
+                },
+                "Then": 1.675,
+                "Else": 1.3
+              }
+            ]
+          }
+        },
+        "StrafeSpeed": {
+          "Mutate": "Divide",
+          "A": 1.35,
+          "B": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              1.3,
+              {
+                "Mutate": "If",
+                "Condition": {
+                  "Mutate": "DuringDrillevator"
+                },
+                "Then": 1.675,
+                "Else": 1.3
+              }
+            ]
+          }
+        }
+      }
+    },
+    "ED_Spider_Buffer_ParadiseMainVB": {
+      "Base": "ED_Spider_Buffer",
+      "Rarity": 12.311,
+      "Resistances": {
+        "DamageMultiplier": [
+          0.8,
+          0.857142857143,
+          0.914285714286,
+          1.0
+        ]
+      },
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ],
+      "Movement": {
+        "MaxPawnSpeed": {
+          "Mutate": "Divide",
+          "A": 1.35,
+          "B": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              1.3,
+              {
+                "Mutate": "If",
+                "Condition": {
+                  "Mutate": "DuringDrillevator"
+                },
+                "Then": 1.675,
+                "Else": 1.3
+              }
+            ]
+          }
+        },
+        "StrafeSpeed": {
+          "Mutate": "Divide",
+          "A": 1.35,
+          "B": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              1.3,
+              {
+                "Mutate": "If",
+                "Condition": {
+                  "Mutate": "DuringDrillevator"
+                },
+                "Then": 1.675,
+                "Else": 1.3
+              }
+            ]
+          }
+        }
+      },
+      "CanBeUsedInEncounters": false,
+      "CanBeUsedForConstantPressure": false
+    },
+    "ED_Spider_Exploder": {
+      "CanBeUsedInEncounters": false
+    },
+    "ED_Spider_ExploderTank": {
+      "CanPlayerStandOn": true,
+      "MaxSpawnCount": 2,
+      "CanBeUsedInEncounters": {
+        "Mutate": "ByMissionType",
+        "Default": {
+          "Mutate": "IfFloat",
+          "Value": {
+            "Mutate": "GunnerCount"
+          },
+          "==": 0,
+          "Then": false,
+          "Else": true
+        },
+        "Escort": false
+      },
+      "Rarity": {
+        "Mutate": "If",
+        "Condition": {
+          "Mutate": "ByEscortPhase",
+          "FinalEventD": true,
+          "Default": false
+        },
+        "Then": 1000,
+        "Else": 15
+      },
+      "Direct": {
+        "Int:NumClusterBombs": {
+          "Mutate": "ByMissionType",
+          "Default": 8,
+          "Salvage": 0
+        }
+      },
+      "Resistances": {
+        "DamageMultiplier": [
+          0.8,
+          0.857142857143,
+          0.914285714286,
+          1.0
+        ]
+      },
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ],
+      "TimeDilation": 1,
+      "Movement": {
+        "AlignDirectionSpeed": 1.5,
+        "AlignToTargetMinRequiredAngle": 1.1,
+        "MaxAcceleration": 1.5,
+        "MaxBrakingDeceleration": 1.5,
+        "MaxPawnSpeed": 1.5,
+        "MaxStrafeDistance": 1.5,
+        "StrafeSpeed": 1.5
+      }
+    },
+    "ED_Spider_ExploderTank_King": {
+      "Base": "ED_PumpkinLootBug"
+    },
+    "ED_Spider_ExploderTank_ParadiseMainVB": {
+      "Base": "ED_Spider_ExploderTank",
+      "CanPlayerStandOn": true,
+      "MaxSpawnCount": 2,
+      "CanBeUsedInEncounters": false,
+      "Rarity": {
+        "Mutate": "If",
+        "Condition": {
+          "Mutate": "ByEscortPhase",
+          "FinalEventD": true,
+          "Default": false
+        },
+        "Then": 1000,
+        "Else": 15
+      },
+      "Direct": {
+        "Int:NumClusterBombs": {
+          "Mutate": "ByMissionType",
+          "Default": 8,
+          "Salvage": 0
+        }
+      },
+      "Resistances": {
+        "DamageMultiplier": [
+          0.8,
+          0.857142857143,
+          0.914285714286,
+          1.0
+        ]
+      },
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ],
+      "CanBeUsedForConstantPressure": false,
+      "TimeDilation": 1,
+      "Movement": {
+        "AlignDirectionSpeed": 1.5,
+        "AlignToTargetMinRequiredAngle": 1.1,
+        "MaxAcceleration": 1.5,
+        "MaxBrakingDeceleration": 1.5,
+        "MaxPawnSpeed": 1.5,
+        "MaxStrafeDistance": 1.5,
+        "StrafeSpeed": 1.5
+      }
+    },
+    "ED_Spider_Grunt_Attacker_white": {
+      "AttackDamageMultiplier": [
+        0.893939393939,
+        0.875342465753,
+        0.874358974359,
+        0.880487804878
+      ],
+      "Movement": {
+        "MaxPawnSpeed": {
+          "Mutate": "Divide",
+          "A": 1.18,
+          "B": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              1.3,
+              {
+                "Mutate": "If",
+                "Condition": {
+                  "Mutate": "DuringDrillevator"
+                },
+                "Then": 1.675,
+                "Else": 1.3
+              }
+            ]
+          }
+        },
+        "StrafeSpeed": {
+          "Mutate": "Divide",
+          "A": 1.18,
+          "B": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              1.3,
+              {
+                "Mutate": "If",
+                "Condition": {
+                  "Mutate": "DuringDrillevator"
+                },
+                "Then": 1.675,
+                "Else": 1.3
+              }
+            ]
+          }
+        }
+      }
+    },
+    "ED_Spider_Lobber": {
+      "MaxSpawnCount": [
+        1,
+        2
+      ]
+    },
+    "ED_Spider_RapidShooter": {
+      "Rarity": 12.589,
+      "Resistances": {
+        "DamageMultiplier": [
+          0.8,
+          0.857142857143,
+          0.914285714286,
+          1.0
+        ]
+      },
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ],
+      "Movement": {
+        "MaxPawnSpeed": {
+          "Mutate": "Divide",
+          "A": 1.35,
+          "B": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              1.3,
+              {
+                "Mutate": "If",
+                "Condition": {
+                  "Mutate": "DuringDrillevator"
+                },
+                "Then": 1.675,
+                "Else": 1.3
+              }
+            ]
+          }
+        },
+        "StrafeSpeed": {
+          "Mutate": "Divide",
+          "A": 1.35,
+          "B": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              1.3,
+              {
+                "Mutate": "If",
+                "Condition": {
+                  "Mutate": "DuringDrillevator"
+                },
+                "Then": 1.675,
+                "Else": 1.3
+              }
+            ]
+          }
+        }
+      }
+    },
+    "ED_Spider_RapidShooter_ParadiseMainVB": {
+      "Base": "ED_Spider_RapidShooter",
+      "Rarity": 12.589,
+      "Resistances": {
+        "DamageMultiplier": [
+          0.8,
+          0.857142857143,
+          0.914285714286,
+          1.0
+        ]
+      },
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ],
+      "Movement": {
+        "MaxPawnSpeed": {
+          "Mutate": "Divide",
+          "A": 1.35,
+          "B": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              1.3,
+              {
+                "Mutate": "If",
+                "Condition": {
+                  "Mutate": "DuringDrillevator"
+                },
+                "Then": 1.675,
+                "Else": 1.3
+              }
+            ]
+          }
+        },
+        "StrafeSpeed": {
+          "Mutate": "Divide",
+          "A": 1.35,
+          "B": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              1.3,
+              {
+                "Mutate": "If",
+                "Condition": {
+                  "Mutate": "DuringDrillevator"
+                },
+                "Then": 1.675,
+                "Else": 1.3
+              }
+            ]
+          }
+        }
+      },
+      "CanBeUsedInEncounters": false,
+      "CanBeUsedForConstantPressure": false
+    },
+    "ED_Spider_ShieldTank": {
+      "Resistances": {
+        "PiercingDamageMultiplier": 1
+      }
+    },
+    "ED_Spider_Shooter": {
+      "Materials": [
+        "",
+        "M_Gem_Red"
+      ],
+      "CanBeUsedInEncounters": {
+        "Mutate": "ByBiome",
+        "Default": true,
+        "FungusBogs": false
+      },
+      "Temperature": {
+        "FreezeTemperature": -75,
+        "WarmingRate": 10
+      },
+      "NoSpawnWithin": 500,
+      "SpawnSpread": 500
+    },
+    "ED_Spider_Spawn": {
+      "CustomVeterans": {
+        "Mutate": "ByPlayerCount",
+        "Values": [
+          "ED_Spider_Spawn",
+          "ED_Spider_Grunt_Attacker_white"
+        ]
+      },
+      "AttackDamageMultiplier": [
+        0.893939393939,
+        0.875342465753,
+        0.874358974359,
+        0.880487804878
+      ],
+      "Movement": {
+        "MaxPawnSpeed": {
+          "Mutate": "Divide",
+          "A": 1.18,
+          "B": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              1.3,
+              {
+                "Mutate": "If",
+                "Condition": {
+                  "Mutate": "DuringDrillevator"
+                },
+                "Then": 1.675,
+                "Else": 1.3
+              }
+            ]
+          }
+        },
+        "StrafeSpeed": {
+          "Mutate": "Divide",
+          "A": 1.18,
+          "B": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              1.3,
+              {
+                "Mutate": "If",
+                "Condition": {
+                  "Mutate": "DuringDrillevator"
+                },
+                "Then": 1.675,
+                "Else": 1.3
+              }
+            ]
+          }
+        }
+      }
+    },
+    "ED_Spider_Spitter": {
+      "UsesBiomeVariants": false,
+      "Temperature": {
+        "FreezeTemperature": -50,
+        "WarmingRate": 6
+      },
+      "CanBeUsedInEncounters": {
+        "Mutate": "ByBiome",
+        "Default": true,
+        "FungusBogs": false
+      }
+    },
+    "ED_Spider_Stalker": {
+      "SpawnSpread": 750,
+      "NoSpawnWithin": 500,
+      "MaxSpawnCount": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "AttackDamageMultiplier": 0.75,
+      "StaggerDurationMultiplier": 1,
+      "StaggerImmunityWindow": 2
+    },
+    "ED_Spider_Stinger": {
+      "Rarity": 8,
+      "MaxSpawnCount": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "StaggerImmunityWindow": 0.2,
+      "Direct": {
+        "Float:SplineHookAttack.OnSuccessCooldown": 7
+      }
+    },
+    "ED_Spider_Swarmer": {
+      "MaxSpawnCount": 100,
+      "MinSpawnCount": 1,
+      "Resistances": {
+        "DamageMultiplier": 3
+      },
+      "DifficultyRating": 6,
+      "Temperature": {
+        "FreezeTemperature": -8
+      }
+    },
+    "ED_Spider_Tank_Boss": {
+      "Temperature": {
+        "BurnTemperature": 100,
+        "DouseFireTemperature": 25,
+        "CoolingRate": 20
+      },
+      "Resistances": {
+        "FireDamageMultiplier": 0.78
+      }
+    },
+    "ED_Spider_Tank_Enc": {
+      "Base": "ED_Spider_Tank",
+      "Resistances": {
+        "PiercingDamageMultiplier": 1
+      }
+    },
+    "ED_Spider_Tank_HeavySpawn": {
+      "SpawnSpread": 500
+    },
+    "ED_Spider_Tank_Wave": {
+      "Base": "ED_Spider_Tank",
+      "Resistances": {
+        "PiercingDamageMultiplier": 1
+      },
+      "CustomVeterans": {
+        "ED_Spider_Tank_Wave": 0.8,
+        "ED_Spider_ShieldTank": {
+          "Mutate": "If",
+          "Condition": {
+            "Mutate": "DuringDefend"
+          },
+          "Then": {
+            "Mutate": "IfFloat",
+            "Value": {
+              "Mutate": "EnemyCount",
+              "ED": "ED_Spider_ShieldTank"
+            },
+            ">=": {
+              "Mutate": "ByPlayerCount",
+              "Values": [
+                1,
+                1,
+                1,
+                2
+              ]
+            },
+            "Then": 0,
+            "Else": {
+              "Mutate": "ByPlayerCount",
+              "Values": [
+                0,
+                0,
+                0.2
+              ]
+            }
+          },
+          "Else": {
+            "Mutate": "IfFloat",
+            "Value": {
+              "Mutate": "EnemyCount",
+              "ED": "ED_Spider_ShieldTank"
+            },
+            ">=": {
+              "Mutate": "ByPlayerCount",
+              "Values": [
+                1,
+                2,
+                3
+              ]
+            },
+            "Then": 0,
+            "Else": 0.2
+          }
+        }
+      }
+    },
+    "ED_Sprout_Normal": {
+      "CanBeUsedForConstantPressure": false,
+      "CanBeUsedInEncounters": true,
+      "DifficultyRating": 80,
+      "MaxSpawnCount": 9999,
+      "MinSpawnCount": 1,
+      "Rarity": 3,
+      "Resistances": {
+        "DamageMultiplier": [
+          0.96,
+          1.028571428571,
+          1.097142857143,
+          1.2
+        ]
+      },
+      "SpawnAmountModifier": 0.75,
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ]
+    },
+    "ED_TentaclePlant": {
+      "DifficultyRating": 180,
+      "Materials": [
+        "M_SpaceRig_Ext_LaunchBay_Blink",
+        "",
+        "M_ShieldGen_GenGlow"
+      ],
+      "SpawnSpread": 0,
+      "TimeDilation": 0.5,
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ]
+    },
+    "ED_Terminator": {
+      "Temperature": {
+        "FreezeTemperature": -45,
+        "UnfreezeTemperature": 150,
+        "WarmingRate": 30,
+        "FozenDamageBonusScale": 3
+      }
+    },
+    "ED_WalkingPlagueheart": {
+      "Base": "ED_PumpkinLootBug"
+    },
+    "ED_Woodlouse": {
+      "SpawnSpread": 750,
+      "NoSpawnWithin": 500,
+      "Rarity": [
+        10,
+        8
+      ],
+      "MaxSpawnCount": [
+        0,
+        0,
+        1
+      ]
+    },
+    "ED_Woodlouse_Youngling": {
+      "CanBeUsedInEncounters": false,
+      "Rarity": [
+        10,
+        8
+      ],
+      "MaxSpawnCount": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "MinSpawnCount": 1,
+      "SpawnSpread": 750,
+      "NoSpawnWithin": 500,
+      "Temperature": {
+        "BurnTemperature": 75,
+        "DouseFireTemperature": 35,
+        "CoolingRate": 7.5,
+        "FreezeTemperature": -90,
+        "UnfreezeTemperature": -45,
+        "WarmingRate": 7.5
+      }
+    },
+    "XED_Paradise_MainVBMiniBulkCompanion": {
+      "Base": "ED_Spider_ExploderTank_small",
+      "CanBeUsedForConstantPressure": false,
+      "CanBeUsedInEncounters": false,
+      "DifficultyRating": 110,
+      "DisplayName": "Mini Bulks",
+      "MaxSpawnCount": 1,
+      "MinSpawnCount": 1,
+      "Rarity": 1,
+      "Resistances": {
+        "DamageMultiplier": [
+          2.4304,
+          2.604,
+          2.7776,
+          3.038
+        ]
+      },
+      "SpawnAmountModifier": {
+        "Mutate": "Divide",
+        "A": 1,
+        "B": {
+          "Mutate": "Multiply",
+          "A": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              1.9,
+              2.1,
+              2.7,
+              3.3
+            ]
+          },
+          "B": {
+            "Mutate": "ByMissionType",
+            "Default": 1,
+            "Egg": {
+              "Mutate": "If",
+              "Condition": {
+                "Mutate": "DuringEggAmbush",
+                "StartingAt": 5,
+                "StoppingAfter": 10
+              },
+              "Then": 2,
+              "Else": 1
+            },
+            "Sabotage": {
+              "Mutate": "If",
+              "Condition": {
+                "Mutate": "DuringEncounters"
+              },
+              "Then": 0.667,
+              "Else": 1
+            }
+          }
+        }
+      },
+      "SpawnSpread": 0,
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ]
+    },
+    "XED_Paradise_MainVBMiniBulkPair": {
+      "Base": "ED_Spider_ExploderTank_small",
+      "CanBeUsedForConstantPressure": false,
+      "CanBeUsedInEncounters": false,
+      "DifficultyRating": 110,
+      "DisplayName": "Mini Bulks",
+      "MaxSpawnCount": 3,
+      "MinSpawnCount": 1,
+      "Rarity": 1,
+      "Resistances": {
+        "DamageMultiplier": [
+          2.4304,
+          2.604,
+          2.7776,
+          3.038
+        ]
+      },
+      "SpawnAmountModifier": {
+        "Mutate": "Divide",
+        "A": 1,
+        "B": {
+          "Mutate": "Multiply",
+          "A": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              1.9,
+              2.1,
+              2.7,
+              3.3
+            ]
+          },
+          "B": {
+            "Mutate": "ByMissionType",
+            "Default": 1,
+            "Egg": {
+              "Mutate": "If",
+              "Condition": {
+                "Mutate": "DuringEggAmbush",
+                "StartingAt": 5,
+                "StoppingAfter": 10
+              },
+              "Then": 2,
+              "Else": 1
+            },
+            "Sabotage": {
+              "Mutate": "If",
+              "Condition": {
+                "Mutate": "DuringEncounters"
+              },
+              "Then": 0.667,
+              "Else": 1
+            }
+          }
+        }
+      },
+      "SpawnSpread": 0,
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ]
+    },
+    "XED_Paradise_MiniBulkPair": {
+      "Base": "ED_Spider_ExploderTank_small",
+      "CanBeUsedForConstantPressure": false,
+      "CanBeUsedInEncounters": false,
+      "DifficultyRating": 110,
+      "DisplayName": "Mini Bulks",
+      "IsBossFight": false,
+      "MaxSpawnCount": 1,
+      "MinSpawnCount": 1,
+      "Rarity": 1,
+      "Resistances": {
+        "DamageMultiplier": [
+          2.4304,
+          2.604,
+          2.7776,
+          3.038
+        ]
+      },
+      "SpawnAmountModifier": {
+        "Mutate": "Divide",
+        "A": 1,
+        "B": {
+          "Mutate": "Multiply",
+          "A": {
+            "Mutate": "ByPlayerCount",
+            "Values": [
+              1.9,
+              2.1,
+              2.7,
+              3.3
+            ]
+          },
+          "B": {
+            "Mutate": "ByMissionType",
+            "Default": 1,
+            "Egg": {
+              "Mutate": "If",
+              "Condition": {
+                "Mutate": "DuringEggAmbush",
+                "StartingAt": 5,
+                "StoppingAfter": 10
+              },
+              "Then": 2,
+              "Else": 1
+            },
+            "Sabotage": {
+              "Mutate": "If",
+              "Condition": {
+                "Mutate": "DuringEncounters"
+              },
+              "Then": 0.667,
+              "Else": 1
+            }
+          }
+        }
+      },
+      "SpawnSpread": 0,
+      "AttackDamageMultiplier": [
+        1.393939393939,
+        1.260273972603,
+        1.179487179487,
+        1.121951219512
+      ]
+    }
+  }
+}
