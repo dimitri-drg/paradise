@@ -41,7 +41,8 @@ The inspiration and first implementation came from Dave's Triple.
   - If Bombers are selected, it spawns Goo, Ice or Fire Bombers with equal probability (1/3 each).
   - If Bulks are selected, it spawns a Bulk or 2x Mini Bulks with equal probability (1/2 each).
 
-- **The effective HP and attack damage** of every enemy spawned by the VB spawner match the values of 4p LX Pro.
+- **The effective HP and attack damage** of enemies spawned by the VB spawner match the values of 4p LX Pro, except solo Grabbers, which match Interstellar's regular solo Grabber.
+- **Solo Grabbers**, both regular and from the VB spawner, have 700 effective HP and vanilla flight settings: chase speed 750, carry speed 500, flee speed 800 and wandering speed 250. They retain the vanilla 20 s carry duration and 25 damage interruption threshold within 4 s. With two or more players, their previous LX Pro settings remain in effect.
 - **Starts 20 s into the mission**, then waits its interval before the first firing.
 - **While any dwarf is down, the timer pauses** and resumes when everyone is back up.
 - **Spawn location:** one location, at a configured distance of 3,000 game units from the player.

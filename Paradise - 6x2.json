@@ -2786,27 +2786,51 @@
       "CanBeUsedInEncounters": true,
       "Resistances": {
         "DamageMultiplier": [
-          0.8,
+          1.0,
           0.857142857143,
           0.914285714286,
           1.0
         ]
       },
       "AttackDamageMultiplier": [
-        1.393939393939,
+        1.151515151515,
         1.260273972603,
         1.179487179487,
         1.121951219512
       ],
       "Grabber": {
-        "CarryAcceleration": 4500,
-        "CarrySpeed": 750,
-        "ChaseAcceleration": 4500,
-        "ChaseSpeed": 1125,
-        "FleeAcceleration": 1500,
-        "FleeSpeed": 1200,
-        "WanderingAcceleration": 1500,
-        "WanderingSpeed": 375
+        "CarryAcceleration": [
+          3000,
+          4500
+        ],
+        "CarrySpeed": [
+          500,
+          750
+        ],
+        "ChaseAcceleration": [
+          4000,
+          4500
+        ],
+        "ChaseSpeed": [
+          750,
+          1125
+        ],
+        "FleeAcceleration": [
+          1000,
+          1500
+        ],
+        "FleeSpeed": [
+          800,
+          1200
+        ],
+        "WanderingAcceleration": [
+          1000,
+          1500
+        ],
+        "WanderingSpeed": [
+          250,
+          375
+        ]
       }
     },
     "ED_Grabber_ParadiseMainVB": {
@@ -2814,28 +2838,52 @@
       "CanBeUsedInEncounters": false,
       "Resistances": {
         "DamageMultiplier": [
-          0.8,
+          1.0,
           0.857142857143,
           0.914285714286,
           1.0
         ]
       },
       "AttackDamageMultiplier": [
-        1.393939393939,
+        1.151515151515,
         1.260273972603,
         1.179487179487,
         1.121951219512
       ],
       "CanBeUsedForConstantPressure": false,
       "Grabber": {
-        "CarryAcceleration": 4500,
-        "CarrySpeed": 750,
-        "ChaseAcceleration": 4500,
-        "ChaseSpeed": 1125,
-        "FleeAcceleration": 1500,
-        "FleeSpeed": 1200,
-        "WanderingAcceleration": 1500,
-        "WanderingSpeed": 375
+        "CarryAcceleration": [
+          3000,
+          4500
+        ],
+        "CarrySpeed": [
+          500,
+          750
+        ],
+        "ChaseAcceleration": [
+          4000,
+          4500
+        ],
+        "ChaseSpeed": [
+          750,
+          1125
+        ],
+        "FleeAcceleration": [
+          1000,
+          1500
+        ],
+        "FleeSpeed": [
+          800,
+          1200
+        ],
+        "WanderingAcceleration": [
+          1000,
+          1500
+        ],
+        "WanderingSpeed": [
+          250,
+          375
+        ]
       }
     },
     "ED_HydraWeed": {

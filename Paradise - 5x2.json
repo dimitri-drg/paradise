@@ -2371,57 +2371,113 @@
       "CanBeUsedInEncounters": true,
       "Resistances": {
         "DamageMultiplier": [
-          0.72,
+          1.0,
           0.737142857143,
           0.834285714286,
           0.9
         ]
       },
       "AttackDamageMultiplier": [
-        1.559322033898,
+        1.28813559322,
         1.439749608764,
         1.348973607038,
         1.274238227147
       ],
       "Grabber": {
-        "CarryAcceleration": 4500,
-        "CarrySpeed": 750,
-        "ChaseAcceleration": 4500,
-        "ChaseSpeed": 1125,
-        "FleeAcceleration": 1500,
-        "FleeSpeed": 1200,
-        "WanderingAcceleration": 1500,
-        "WanderingSpeed": 375
-      }
+        "CarryAcceleration": [
+          3000,
+          4500
+        ],
+        "CarrySpeed": [
+          500,
+          750
+        ],
+        "ChaseAcceleration": [
+          4000,
+          4500
+        ],
+        "ChaseSpeed": [
+          750,
+          1125
+        ],
+        "FleeAcceleration": [
+          1000,
+          1500
+        ],
+        "FleeSpeed": [
+          800,
+          1200
+        ],
+        "WanderingAcceleration": [
+          1000,
+          1500
+        ],
+        "WanderingSpeed": [
+          250,
+          375
+        ]
+      },
+      "HealthMultiplier": [
+        1.111111111111,
+        1
+      ]
     },
     "ED_Grabber_ParadiseMainVB": {
       "Base": "ED_Grabber",
       "CanBeUsedInEncounters": false,
       "Resistances": {
         "DamageMultiplier": [
-          0.72,
+          1.0,
           0.737142857143,
           0.834285714286,
           0.9
         ]
       },
       "AttackDamageMultiplier": [
-        1.559322033898,
+        1.28813559322,
         1.439749608764,
         1.348973607038,
         1.274238227147
       ],
       "CanBeUsedForConstantPressure": false,
       "Grabber": {
-        "CarryAcceleration": 4500,
-        "CarrySpeed": 750,
-        "ChaseAcceleration": 4500,
-        "ChaseSpeed": 1125,
-        "FleeAcceleration": 1500,
-        "FleeSpeed": 1200,
-        "WanderingAcceleration": 1500,
-        "WanderingSpeed": 375
-      }
+        "CarryAcceleration": [
+          3000,
+          4500
+        ],
+        "CarrySpeed": [
+          500,
+          750
+        ],
+        "ChaseAcceleration": [
+          4000,
+          4500
+        ],
+        "ChaseSpeed": [
+          750,
+          1125
+        ],
+        "FleeAcceleration": [
+          1000,
+          1500
+        ],
+        "FleeSpeed": [
+          800,
+          1200
+        ],
+        "WanderingAcceleration": [
+          1000,
+          1500
+        ],
+        "WanderingSpeed": [
+          250,
+          375
+        ]
+      },
+      "HealthMultiplier": [
+        1.111111111111,
+        1
+      ]
     },
     "ED_JellyBreeder": {
       "Resistances": {
